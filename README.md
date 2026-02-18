@@ -56,8 +56,7 @@ Auxiliary datasets for country grouping and contextual data:
 
 ## 📜 Citation
 
-UNICEF (2025). *Global Child Hazard Database & Children’s Climate Risk Index (CCRI) — Processing Scripts.*
-
+UNICEF. (2026). Children’s Climate Risk Report (CCRR): Children’s Climate Risk Report Data Pipeline [Computer software]. GitHub. https://github.com/unicef/CCRR
 ---
 
 ## ✉️ Contact
