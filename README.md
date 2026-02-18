@@ -56,7 +56,8 @@ Auxiliary datasets for country grouping and contextual data:
 
 ## 📜 Citation
 
-UNICEF. (2026). Children’s Climate Risk Report (CCRR): Children’s Climate Risk Report Data Pipeline [Computer software]. GitHub. https://github.com/unicef/CCRR
+UNICEF (2026). *Children’s Climate Risk Report (CCRR): Children’s Climate Risk Report Data Pipeline [Computer software]. GitHub. https://github.com/unicef/CCRR*
+
 ---
 
 ## ✉️ Contact
