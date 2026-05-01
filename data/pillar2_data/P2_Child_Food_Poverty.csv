@@ -1,114 +1,114 @@
 iso3,time_period,obs_value,data_source
-AFG,2022,48.7,Afghanistan Multiple Indicator Cluster Survey 2022-23  Survey Findings Report
-ALB,2017,18.2,Albania Demographic and Health Survey 2017-18. Tirana  Albania  Institute of Statistics  Institute of Public Health  and ICF
-DZA,2019,16.8,Enquête par grappes à indicateurs multiples [MICS] 2019
-AGO,2015,29.9,Inquérito de Indicadores Múltiplos e de Saúde em Angola 2015-2016. Luanda  Angola e Rockville  Maryland  EUA  INE  MINSA  MINPLAN e ICF International.
-ARM,2016,14.4,Armenia Demographic and Health Survey 2015-16. Rockville  Maryland  USA  National Statistical Service  Ministry of Health  and ICF
-TCA,2020,21.5,Turks & Caicos Islands Multiple Indicator Cluster Survey 2019-2020  Survey  Findings Report. Grand Turk  Turks & Caicos Islands  Department of Statistics
-AZE,2023,8.3,The Republic of Azerbaijan Multiple Indicator Cluster Survey 2023
-BGD,2022,21.3,Bangladesh Demographic Health Survey 2022
-BLR,2019,1.2,2019 Belarus Multiple Indicator Cluster Survey  Survey Findings Report. Republic of Belarus  Minsk  National Statistical Committee of the Republic of Belarus and United Nations Children’s Fund (UNICEF).
-BLZ,2015,9.9,Belize Multiple Indicator Cluster Survey  2015-2016  Final Report. Belmopan  Belize  Statistical Institute of Belize and UNICEF Belize.
-BTN,2015,47.3,National Nutrition Survey 2015  Nutrition Programme Department of Public Health Ministry of Health Bhutan
-BOL,2023,8.8,Bolivia Encuesta de Demografia y Salud - EDSA 2023
+AFG,2022,48.7252,Afghanistan Multiple Indicator Cluster Survey 2022-23  Survey Findings Report
+AGO,2015,29.8735,Inquérito de Indicadores Múltiplos e de Saúde em Angola 2015-2016. Luanda  Angola e Rockville  Maryland  EUA  INE  MINSA  MINPLAN e ICF International.
+ALB,2017,18.178,Albania Demographic and Health Survey 2017-18. Tirana  Albania  Institute of Statistics  Institute of Public Health  and ICF
+ARM,2016,14.4028,Armenia Demographic and Health Survey 2015-16. Rockville  Maryland  USA  National Statistical Service  Ministry of Health  and ICF
+AZE,2023,8.2518,The Republic of Azerbaijan Multiple Indicator Cluster Survey 2023
+BDI,2016,17.938,Troisième Enquête Démographique et de Santé. Bujumbura  Burundi   ISTEEBU  MSPLS  et ICF
+BEN,2021,36.1072,Enquête par Grappes à Indicateurs Multiples  Bénin  2021-2022  Rapport des résultats de l’enquête
+BFA,2021,31.7658,Enquête Démographique et de Santé du Burkina Faso 2021. Ouagadougou  Burkina Faso et  Rockville  Maryland  USA   INSD et ICF
+BGD,2022,21.2553,Bangladesh Demographic Health Survey 2022
+BLR,2019,1.1691,2019 Belarus Multiple Indicator Cluster Survey  Survey Findings Report. Republic of Belarus  Minsk  National Statistical Committee of the Republic of Belarus and United Nations Children’s Fund (UNICEF).
+BLZ,2015,9.8895,Belize Multiple Indicator Cluster Survey  2015-2016  Final Report. Belmopan  Belize  Statistical Institute of Belize and UNICEF Belize.
+BOL,2023,8.8465,Bolivia Encuesta de Demografia y Salud - EDSA 2023
 BRA,2019,8.4,Estudo Nacional de Alimentação e Nutrição Infantil (ENANI)  Brasil 2019
-GAB,2020,27.2,Gabon Enquête Démographique et de Santé (EDSG-III) 2019-2021
-GMB,2020,33.4,The Gambia Demographic and Health Survey 2019- 20. Banjul  The Gambia and Rockville  Maryland  USA  GBoS and ICF
-GEO,2018,7.6,Georgia Multiple Indicator Cluster Survey 2018  Survey Findings Report. Tbilisi  Georgia  National Statistics Office of Georgia.
-GHA,2022,21.3,Ghana Demographic and Health Survey 2022
-BFA,2021,31.7,Enquête Démographique et de Santé du Burkina Faso 2021. Ouagadougou  Burkina Faso et  Rockville  Maryland  USA   INSD et ICF
-BDI,2016,17.9,Troisième Enquête Démographique et de Santé. Bujumbura  Burundi   ISTEEBU  MSPLS  et ICF
-KHM,2021,13.7,Cambodia Demographic and Health Survey 2021–22
-CHN,2017,10.2,China Nutrition and Health Surveillance of Children and Lactating Women 2016–2017
-CRI,2018,3.0,Encuesta de Mujeres  Niñez y Adolescencia (EMNA)  Informe de resultados de la encuesta. San José  Costa Rica. 2019
-CIV,2021,31.0,Enquête Démographique et de Santé de Côte d’Ivoire  2021. Rockville  Maryland  USA   INS/Côte d’Ivoire et ICF
-DOM,2019,7.8,Encuesta Nacional de Hogares de Propósitos Múltiples (ENHOGAR-MICS) 2019
-ECU,2024,2.7,Encuesta Nacional de Desnutrición Infantil - ENDI Ronda 2  Ecuador 2023-2024
-SLV,2014,4.8,Encuesta nacional de salud 2014 - Encuesta de indicadores multiples por conglomerados 2014  Resultados principales. San Salvador  El Salvador  Ministerio de Salud e Instituto Nacional de Salud.
-ETH,2019,46.0,Ethiopia Mini Demographic and Health  Survey 2019  Final Report. Rockville  Maryland  USA  EPHI and ICF  2021.
-GTM,2015,9.4,Encuesta Nacional de Salud Materno Infantil 2014-2015. Ciudad de Guatemala  Guatemala  2015.
-GNB,2019,52.8,Inquérito aos Indicadores Múltiplos (MICS5) 2018-2019  Relatório Final. Bissau  Guiné-Bissau  Ministério da Economia e Finanças e Direcção Geral do Plano/ Instituto Nacional de Estatística (INE).
-GIN,2018,54.3,Enquête Démographique et de Santé en Guinée 2018. Conakry  Guinée  et Rockville  Maryland  USA   INS et ICF
-GUY,2019,19.5,Guyana Multiple Indicator Cluster Survey 2019-2020  Survey Findings  Report. Georgetown  Guyana  UNICEF
-HTI,2017,31.6,Enquête Mortalité  Morbidité et Utilisation des Services (EMMUS-VI 2016-2017) Pétion-Ville  Haïti  et Rockville  Maryland  USA   IHE et ICF
-HND,2019,9.9,Encuesta Nacional de Demografía y Salud/ Encuesta de Indicadores Múltiples por Conglomerados. Honduras 2019. Tegucigalpa.
-IRQ,2018,14.3,Iraq Multiple Indicator Cluster Survey 2018  Survey Findings Report. Baghdad  Iraq  CSO & KRSO
-JAM,2022,9.2,Jamaica 2022 Multiple Indicator Cluster Survey
-JOR,2023,19.7,Jordan Population and Family and Health Survey 2023
-KAZ,2015,11.5,2015 Kazakhstan Multiple Indicator Cluster Survey  Final Report. Astana  Kazakhstan  The Statistics Committee of the Ministry of National Economy of the Republic of Kazakhstan  2016.
-KEN,2022,16.2,Kenya Demographic and Health Survey 2022
-KIR,2018,34.5,Kiribati 2018-2019 Social Development Indicator Survey
-KGZ,2023,8.9,Kyrgyz Republic Multiple Indicator Cluster Survey 2023 Survey Findings Report September  2024
-LAO,2023,22.3,Lao Social Indicator Survey III-2023 (MICS)
+BTN,2015,47.3427,National Nutrition Survey 2015  Nutrition Programme Department of Public Health Ministry of Health Bhutan
+CAF,2010,19.031,Suivi de la situation des enfants  des femmes et des hommes. Enquête par grappes à indicateurs multiples - MICS couplée avec la sérologie VIH  RCA  2010  Rapport final. Bangui  RCA  ICASEES  2012.
+CHN,2017,10.2,Status of Infant and Young Child Feeding for Children Aged 6–23 Months in China in 2016–2017  Journal of Hygiene Research vol 52  no 5  2023 (analysis based on data from the China Nutrition and Health Surveillance of Children and Lactating Women 2016–17)
+CIV,2021,31.0193,Enquête Démographique et de Santé de Côte d’Ivoire  2021. Rockville  Maryland  USA   INS/Côte d’Ivoire et ICF
+CMR,2018,27.6973,Enquête Démographique et de Santé du Cameroun 2018. Yaoundé  Cameroun et Rockville  Maryland  USA   INS et ICF. 2020
+COD,2023,29.1125,Enquête Démographique et de Santé EDS-RDC III 2023–24
+COG,2014,34.7078,Enquête par grappes à indicateurs multiples (MICS5 2014-2015)  Rapport final. Brazzaville  Congo   Institut National de la Statistique et UNICEF.
+COL,2010,7.8851,Encuesta nacional de demografia y salud 2010. Demographic and  Health Surveys. Bogota  Colombia  Profamilia  2011
+COM,2022,34.8466,Comoros 2022 Multiple Indicator Cluster Survey
+CRI,2018,3.0041,Encuesta de Mujeres  Niñez y Adolescencia (EMNA)  Informe de resultados de la encuesta. San José  Costa Rica. 2019
+CUB,2019,9.4268,Cuba Encuesta de Indicadores Múltiples por Conglomerados 2019  Informe de resultados de la encuesta. La Habana  Cuba  Dirección de Registros Médicos y Estadísticas de Salud.
+DOM,2019,7.81,Encuesta Nacional de Hogares de Propósitos Múltiples (ENHOGAR-MICS) 2019
+DZA,2019,16.8087,Enquête par grappes à indicateurs multiples [MICS] 2019
+ECU,2024,2.7218,Encuesta Nacional de Desnutrición Infantil - ENDI Ronda 2  Ecuador 2023-2024
+EGY,2021,22.2583,Egypt Family Health Survey (EFHS) 2021
+ETH,2019,46.0113,Ethiopia Mini Demographic and Health  Survey 2019  Final Report. Rockville  Maryland  USA  EPHI and ICF  2021.
+FJI,2021,7.8222,Fiji Multiple Indicator Cluster Survey 2021  Survey Findings  Report. Suva  Fiji  Fiji Bureau of Statistics.
+GAB,2020,27.2458,Gabon Enquête Démographique et de Santé (EDSG-III) 2019-2021
+GEO,2018,7.6014,Georgia Multiple Indicator Cluster Survey 2018  Survey Findings Report. Tbilisi  Georgia  National Statistics Office of Georgia.
+GHA,2022,21.3812,Ghana Demographic and Health Survey 2022
+GIN,2018,54.3115,Enquête Démographique et de Santé en Guinée 2018. Conakry  Guinée  et Rockville  Maryland  USA   INS et ICF
+GMB,2020,33.381,The Gambia Demographic and Health Survey 2019- 20. Banjul  The Gambia and Rockville  Maryland  USA  GBoS and ICF
+GNB,2019,52.7805,Inquérito aos Indicadores Múltiplos (MICS5) 2018-2019  Relatório Final. Bissau  Guiné-Bissau  Ministério da Economia e Finanças e Direcção Geral do Plano/ Instituto Nacional de Estatística (INE).
+GTM,2015,9.3521,Encuesta Nacional de Salud Materno Infantil 2014-2015. Ciudad de Guatemala  Guatemala  2015.
+GUY,2019,19.5224,Guyana Multiple Indicator Cluster Survey 2019-2020  Survey Findings  Report. Georgetown  Guyana  UNICEF
+HND,2019,9.9302,Encuesta Nacional de Demografía y Salud/ Encuesta de Indicadores Múltiples por Conglomerados. Honduras 2019. Tegucigalpa.
+HTI,2017,31.5764,Enquête Mortalité  Morbidité et Utilisation des Services (EMMUS-VI 2016-2017) Pétion-Ville  Haïti  et Rockville  Maryland  USA   IHE et ICF
+IDN,2017,12.1943,Indonesia Demographic and Health Survey 2017. Jakarta  Indonesia  BKKBN  BPS  Kemenkes  and ICF.
+IND,2020,40.2538,National Family Health Survey (NFHS-5)  2019-21  India. Mumbai  IIPS
+IRQ,2018,14.3474,Iraq Multiple Indicator Cluster Survey 2018  Survey Findings Report. Baghdad  Iraq  CSO & KRSO
+JAM,2022,9.2314,Jamaica 2022 Multiple Indicator Cluster Survey
+JOR,2023,19.651,Jordan Population and Family and Health Survey 2023
+KAZ,2015,11.4764,2015 Kazakhstan Multiple Indicator Cluster Survey  Final Report. Astana  Kazakhstan  The Statistics Committee of the Ministry of National Economy of the Republic of Kazakhstan  2016.
+KEN,2022,16.2028,Kenya Demographic and Health Survey 2022
+KGZ,2023,8.937,Kyrgyz Republic Multiple Indicator Cluster Survey 2023 Survey Findings Report September  2024
+KHM,2021,13.6656,Cambodia Demographic and Health Survey 2021–22
+KIR,2018,34.4744,Kiribati 2018-2019 Social Development Indicator Survey
+LAO,2023,22.3199,Lao Social Indicator Survey III-2023 (MICS)
 LBN,2023,30.2,Lebanese Integrated Micronutrient and Anthropometry Survey 2023
-LSO,2024,31.3,Lesotho Demograhic and Health Survey 2023-24
-LBR,2019,42.5,Liberia Demographic and Health Survey 2019-20. Monrovia  Liberia and Rockville  Maryland  USA/ Liberia Institute of Statistics and Geo-Information Services (LISGIS)  Ministry of Health [Liberia]  and ICF. 2021.
-MHL,2017,29.4,Republic of the Marshall Islands Integrated Child Health and Nutrition Survey 2017  Final Report. Majuro  Republic of the Marshall Islands  RMI Ministry of Health and Human Services  RMI Economic  Policy Planning and Statistic Office  2017
-MRT,2020,38.2,Enquête Démographique et  de Santé en Mauritanie 2019-2021. Nouakchott  Mauritanie et Rockville  Maryland  USA   ONS  MS  et ICF.
-PRY,2016,5.6,Encuesta de Indicadores Multiples por Conglomerados MICS Paraguay 2016
-PER,2024,2.3,Peru Encuesta Demográfica y de Salud Familiar-ENDES 2024 Nacional y Departamental
+LBR,2019,42.5301,Liberia Demographic and Health Survey 2019-20. Monrovia  Liberia and Rockville  Maryland  USA/ Liberia Institute of Statistics and Geo-Information Services (LISGIS)  Ministry of Health [Liberia]  and ICF. 2021.
+LKA,2016,4.795,Sri Lanka Demographic and Health Survey 2016
+LSO,2024,31.2899,Lesotho Demograhic and Health Survey 2023-24
+MDA,2005,6.1653,Moldova demographic and health survey 2005. Demographic and Health Surveys. Calverton  Maryland  NCPM of the Ministry of Health and Social Protection and ORC Macro  2006
 MDG,2024,23.7,Enquête Nationale sur les Carences en Micronutriments à Madagascar – ENCM 2024. Antananarivo   2025.
-MDV,2017,5.6,Maldives Demographic and Health Survey 2016-17. Malé  Maldives  and Rockville  Maryland  USA  MOH and ICF
-MLI,2024,41.9,Septième Enquête  Démographique et de Santé au Mali 2023–2024
-MEX,2015,8.7,Encuesta Nacional de Niños  Niñas y Mujeres en México 2015 - Encuesta de Indicadores Múltiples por Conglomerados 2015  Resultados Principales  2016
-MDA,2005,6.2,Moldova demographic and health survey 2005. Demographic and Health Surveys. Calverton  Maryland  NCPM of the Ministry of Health and Social Protection and ORC Macro  2006
-MNG,2018,9.7,Social Indicator Sample Survey-2018  Survey Findings Report. Ulaanbaatar  Mongolia  National Statistical Office of Mongolia
-MOZ,2022,30.9,Inquérito Demográfico e de Saúde em Moçambique 2022–23
-NAM,2013,40.5,The Namibia demographic and health survey 2013. Demographic and Health Surveys. Windhoek  Namibia  and Rockville  Maryland  USA  MoHSS and ICF International  2014
-NRU,2023,12.2,Nauru Multiple Indicator Cluster Survey 2023. Survey Findings Report. October 2024
-NPL,2022,7.9,Nepal Demographic and Health Survey 2022
-NER,2022,32.4,Enquete Nutritionnelle et de Mortalite Retrospective au Niger
-PAK,2018,38.4,Pakistan Demographic and Health Survey 2017-18. Islamabad  Pakistan  and Rockville  Maryland  USA  NIPS and ICF
-QAT,2023,11.3,Qatar Multiple Indicator Cluster Survey 2023  Survey Findings Report. Doha  Qatar  National Planning Council.
-WSM,2019,22.6,Samoa Demographic and Health Survey - Multiple Indicator Cluster Survey
-TON,2019,12.8,Tonga Multiple Indicator Cluster Survey 2019  Survey Findings Report. Nuku’alofa  Tonga  Tonga Statistics Department
-STP,2019,22.3,Inquérito de Indicadores Múltiplos 2019  Relatório final. São Tomé  São Tomé e Príncipe  Instituto Nacional de Estatística e Fundo das Nações Unidas para a Infância
-SLE,2021,46.5,Sierra Leone 2021 National Nutrition Survey
-SOM,2018,63.1,The Somali Health and Demographic Survey 2020
-ZAF,2016,22.8,South Africa Demographic and Health Survey 2016. Pretoria  South Africa  and Rockville  Maryland  USA  NDoH  Stats SA  SAMRC  and ICF
-LKA,2016,4.8,Sri Lanka Demographic and Health Survey 2016
-SUR,2018,23.4,Suriname Multiple Indicator Cluster Survey 2018  Survey Findings Report. Paramaribo  Suriname  Ministry of Social Affairs and Public Housing
-SWZ,2021,18.8,Eswatini Multiple Indicator Cluster Survey 2021-2022
+MDV,2017,5.6484,Maldives Demographic and Health Survey 2016-17. Malé  Maldives  and Rockville  Maryland  USA  MOH and ICF
+MEX,2015,8.7347,Encuesta Nacional de Niños  Niñas y Mujeres en México 2015 - Encuesta de Indicadores Múltiples por Conglomerados 2015  Resultados Principales  2016
+MHL,2017,29.4092,Republic of the Marshall Islands Integrated Child Health and Nutrition Survey 2017  Final Report. Majuro  Republic of the Marshall Islands  RMI Ministry of Health and Human Services  RMI Economic  Policy Planning and Statistic Office  2017
+MKD,2019,10.933,2018-2019 North Macedonia Multiple Indicator Cluster Survey  Survey  Findings  Report. Skopje  North Macedonia  State Statistical Office and UNICEF.
+MLI,2024,41.853,Septième Enquête  Démographique et de Santé au Mali 2023–2024
+MMR,2016,34.5201,Myanmar Demographic and Health Survey 2015-16  Final Report. 2016
+MNE,2018,7.9064,2018 Montenegro multiple indicator cluster survey (MICS)  Final report. Podgorica  Montenegro  MONSTAT and UNICEF  2019
+MNG,2018,9.712,Social Indicator Sample Survey-2018  Survey Findings Report. Ulaanbaatar  Mongolia  National Statistical Office of Mongolia
+MOZ,2022,30.9459,Inquérito Demográfico e de Saúde em Moçambique 2022–23
+MRT,2020,38.2455,Enquête Démographique et  de Santé en Mauritanie 2019-2021. Nouakchott  Mauritanie et Rockville  Maryland  USA   ONS  MS  et ICF.
+MWI,2020,25.5207,Malawi Multiple Indicator Cluster Survey 2019-20  Survey Findings Report. Zomba  Malawi  National Statistical Office
+NAM,2013,40.4682,The Namibia demographic and health survey 2013. Demographic and Health Surveys. Windhoek  Namibia  and Rockville  Maryland  USA  MoHSS and ICF International  2014
+NER,2022,32.4248,Enquete Nutritionnelle et de Mortalite Retrospective au Niger
+NGA,2024,43.926,Nigeria Demographic and Health Survey 2023–24
+NPL,2022,7.9108,Nepal Demographic and Health Survey 2022
+NRU,2023,12.1739,Nauru Multiple Indicator Cluster Survey 2023. Survey Findings Report. October 2024
+PAK,2018,38.4221,Pakistan Demographic and Health Survey 2017-18. Islamabad  Pakistan  and Rockville  Maryland  USA  NIPS and ICF
+PER,2024,2.255,Peru Encuesta Demográfica y de Salud Familiar-ENDES 2024 Nacional y Departamental
+PHL,2022,18.0999,Philippine National Demographic and Health Survey 2022
+PNG,2017,25.9709,Papua New Guinea Demographic and Health Survey 2016-18. Port Moresby  Papua New Guinea  and Rockville  Maryland  USA  NSO and ICF. 2019
+PRY,2016,5.5889,Encuesta de Indicadores Multiples por Conglomerados MICS Paraguay 2016
+PSE,2020,12.8927,Palestinian Multiple Indicator Cluster Survey 2019-2020   Survey Findings Report  Ramallah  Palestine.
+QAT,2023,11.2884,Qatar Multiple Indicator Cluster Survey 2023  Survey Findings Report. Doha  Qatar  National Planning Council.
+RWA,2020,12.399,Rwanda Demographic and Health Survey 2019-20 Final Report. Kigali  Rwanda  and Rockville  Maryland  USA  NISR and ICF.
+SDN,2014,33.7856,Multiple Indicator Cluster Survey 2014 of Sudan  Final Report. Khartoum  Sudan  UNICEF and Central Bureau of Statistics (CBS)  February 2016.
+SEN,2023,31.5321,Sénégal   Enquête Démographique et  de Santé Continue (EDS Continue) 2023
+SLE,2021,46.4948,Sierra Leone 2021 National Nutrition Survey
+SLV,2014,4.7982,Encuesta nacional de salud 2014 - Encuesta de indicadores multiples por conglomerados 2014  Resultados principales. San Salvador  El Salvador  Ministerio de Salud e Instituto Nacional de Salud.
+SOM,2018,63.0806,The Somali Health and Demographic Survey 2020
+SRB,2019,1.606,Serbia Multiple Indicator Cluster Survey 2019  Survey Findings Reports. Belgrade  Serbia  Statistical Office of the Republic of Serbia and UNICEF
+STP,2019,22.3206,Inquérito de Indicadores Múltiplos 2019  Relatório final. São Tomé  São Tomé e Príncipe  Instituto Nacional de Estatística e Fundo das Nações Unidas para a Infância
+SUR,2018,23.4438,Suriname Multiple Indicator Cluster Survey 2018  Survey Findings Report. Paramaribo  Suriname  Ministry of Social Affairs and Public Housing
+SWZ,2021,18.7626,Eswatini Multiple Indicator Cluster Survey 2021-2022
 SYR,2019,30.4,Nutritional status survey according to SMART methodology  Syria April 2019
-TJK,2023,32.2,Tajikistan Demographic and Health Survey 2023. Dushanbe  Republic of Tajikistan and Rockville  Maryland  USA  Agency on Statistics under the President of the Republic of Tajikistan and ICF
-THA,2022,9.8,Thailand Multiple Indicator Cluster Survey 2022  Survey Findings Report
-MKD,2019,10.9,2018-2019 North Macedonia Multiple Indicator Cluster Survey  Survey  Findings  Report. Skopje  North Macedonia  State Statistical Office and UNICEF.
-TLS,2020,30.2,Timor-Leste Food and Nutrition Survey 2020
-TGO,2017,30.5,MICS6 TOGO  2017  Rapport final. Lomé  Togo
-TTO,2022,14.7,Trinidad and Tobago Multiple Indicator Cluster Survey 2022
-TKM,2019,4.0,Multiple Indicator Cluster Survey  2019. Survey Report. Ashgabat  Turkmenistan  State Committee for Statistics of Turkmenistan and UNICEF.
-TUV,2019,14.0,Tuvalu Multiple Indicator Cluster Survey 2019-20  Survey Findings Report. Funafuti  Tuvalu  Central Statistics Division
-URY,2023,4.1,Salud  Nutrición y Desarrollo en la Primera Infancia en Uruguay (ENDIS)  2023
-UZB,2021,11.1,Uzbekistan multiple indicator cluster survey 2021-22
-VNM,2020,8.5,Survey measuring Viet Nam Sustainable Development Goal indicators on  Children and Women 2020-2021  Survey Findings Report. Ha Noi  Viet Nam  General Statistics Office
+TCA,2020,21.4694,Turks & Caicos Islands Multiple Indicator Cluster Survey 2019-2020  Survey  Findings Report. Grand Turk  Turks & Caicos Islands  Department of Statistics
+TCD,2024,28.6,Enquête nationale de nutrition et de mortalité rétrospective (SMART 2024) Rapport Final
+TGO,2017,30.4968,MICS6 TOGO  2017  Rapport final. Lomé  Togo
+THA,2022,9.7658,Thailand Multiple Indicator Cluster Survey 2022  Survey Findings Report
+TJK,2023,32.2188,Tajikistan Demographic and Health Survey 2023. Dushanbe  Republic of Tajikistan and Rockville  Maryland  USA  Agency on Statistics under the President of the Republic of Tajikistan and ICF
+TKM,2024,8.3858,Turkmenistan 2024 Multiple Indicator Cluster Survey
+TLS,2020,30.1951,Timor-Leste Food and Nutrition Survey 2020
+TON,2019,12.7556,Tonga Multiple Indicator Cluster Survey 2019  Survey Findings Report. Nuku’alofa  Tonga  Tonga Statistics Department
+TTO,2022,14.6548,Trinidad and Tobago Multiple Indicator Cluster Survey 2022
+TUN,2023,9.4524,Enquête par grappes à indicateurs multiples (MICS) 2023  Rapport sur les résultats de l’enquête. Tunisie. 2024
+TUV,2019,13.9949,Tuvalu Multiple Indicator Cluster Survey 2019-20  Survey Findings Report. Funafuti  Tuvalu  Central Statistics Division
+TZA,2022,21.7901,The 2022 Tanzania Demographic and Health Survey and Malaria Indicator Survey
+UGA,2020,24.2913,Uganda National Panel Survey 2019-2020
+URY,2023,4.0897,Salud  Nutrición y Desarrollo en la Primera Infancia en Uruguay (ENDIS)  2023
+UZB,2021,11.0731,Uzbekistan multiple indicator cluster survey 2021-22
+VNM,2020,8.5223,Survey measuring Viet Nam Sustainable Development Goal indicators on  Children and Women 2020-2021  Survey Findings Report. Ha Noi  Viet Nam  General Statistics Office
+VUT,2023,25.4718,Vanuatu Multiple Indicator Cluster Survey 2023
+WSM,2019,22.646,Samoa Demographic and Health Survey - Multiple Indicator Cluster Survey
 YEM,2021,27.4,The Report of Nutrition and Mortality Surveys
-ZWE,2019,25.1,Zimbabwe Multiple Indicator  Cluster Survey 2019  Survey Findings Report. Harare  Zimbabwe  ZIMSTAT and UNICEF
-IDN,2021,13.6,Hasil Studi Status Gizi Indonesia (SSGI) 2021
-MMR,2016,34.5,Myanmar Demographic and Health Survey 2015-16  Final Report. 2016
-PNG,2017,26.0,Papua New Guinea Demographic and Health Survey 2016-18. Port Moresby  Papua New Guinea  and Rockville  Maryland  USA  NSO and ICF. 2019
-PHL,2022,18.1,Philippine National Demographic and Health Survey 2022
-FJI,2021,7.8,Fiji Multiple Indicator Cluster Survey 2021  Survey Findings  Report. Suva  Fiji  Fiji Bureau of Statistics.
-VUT,2023,25.5,Vanuatu Multiple Indicator Cluster Survey 2023
-SEN,2023,31.5,Sénégal   Enquête Démographique et  de Santé Continue (EDS Continue) 2023
-CUB,2019,9.4,Cuba Encuesta de Indicadores Múltiples por Conglomerados 2019  Informe de resultados de la encuesta. La Habana  Cuba  Dirección de Registros Médicos y Estadísticas de Salud.
-SDN,2014,33.8,Multiple Indicator Cluster Survey 2014 of Sudan  Final Report. Khartoum  Sudan  UNICEF and Central Bureau of Statistics (CBS)  February 2016.
-EGY,2021,22.3,Egypt Family Health Survey (EFHS) 2021
-PSE,2020,12.9,Palestinian Multiple Indicator Cluster Survey 2019-2020   Survey Findings Report  Ramallah  Palestine.
-MNE,2018,7.9,2018 Montenegro multiple indicator cluster survey (MICS)  Final report. Podgorica  Montenegro  MONSTAT and UNICEF  2019
-SRB,2019,1.6,Serbia Multiple Indicator Cluster Survey 2019  Survey Findings Reports. Belgrade  Serbia  Statistical Office of the Republic of Serbia and UNICEF
-TUN,2023,9.5,Enquête par grappes à indicateurs multiples (MICS) 2023  Rapport sur les résultats de l’enquête. Tunisie. 2024
-COL,2016,7.2,Colombia National Survey of the Nutritional Situation 2015
-RWA,2020,12.4,Rwanda Demographic and Health Survey 2019-20 Final Report. Kigali  Rwanda  and Rockville  Maryland  USA  NISR and ICF.
-TZA,2022,21.8,The 2022 Tanzania Demographic and Health Survey and Malaria Indicator Survey
-COD,2023,29.1,Enquête Démographique et de Santé EDS-RDC III 2023–24
-UGA,2020,24.3,Uganda National Panel Survey 2019-2020
-MWI,2020,25.5,Malawi Multiple Indicator Cluster Survey 2019-20  Survey Findings Report. Zomba  Malawi  National Statistical Office
-ZMB,2018,23.6,Zambia Demographic and Health Survey 2018. Lusaka  Zambia  and Rockville  Maryland  USA  Zambia Statistics Agency  Ministry of Health  and ICF
-CMR,2018,27.7,Enquête Démographique et de Santé du Cameroun 2018. Yaoundé  Cameroun et Rockville  Maryland  USA   INS et ICF. 2020
-TCD,2022,16.7,ENQUETE NATIONALE DE NUTRITION ET DE MORTALITE RETROSPECTIVE (SMART)
-CAF,2010,19.0,Suivi de la situation des enfants  des femmes et des hommes. Enquête par grappes à indicateurs multiples - MICS couplée avec la sérologie VIH  RCA  2010  Rapport final. Bangui  RCA  ICASEES  2012.
-COG,2014,34.7,Enquête par grappes à indicateurs multiples (MICS5 2014-2015)  Rapport final. Brazzaville  Congo   Institut National de la Statistique et UNICEF.
-NGA,2024,43.9,Nigeria Demographic and Health Survey 2023–24
-BEN,2021,36.1,Enquête par Grappes à Indicateurs Multiples  Bénin  2021-2022  Rapport des résultats de l’enquête
-COM,2022,34.8,Comoros 2022 Multiple Indicator Cluster Survey
-IND,2020,40.3,National Family Health Survey (NFHS-5)  2019-21  India. Mumbai  IIPS
+ZAF,2016,22.7922,South Africa Demographic and Health Survey 2016. Pretoria  South Africa  and Rockville  Maryland  USA  NDoH  Stats SA  SAMRC  and ICF
+ZMB,2018,23.5842,Zambia Demographic and Health Survey 2018. Lusaka  Zambia  and Rockville  Maryland  USA  Zambia Statistics Agency  Ministry of Health  and ICF
+ZWE,2019,25.0629,Zimbabwe Multiple Indicator  Cluster Survey 2019  Survey Findings Report. Harare  Zimbabwe  ZIMSTAT and UNICEF

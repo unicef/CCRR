@@ -1,59 +1,106 @@
-# Index Construction & Statistical Methodology
+# data_processing — CCRI Pipeline (Stage 3)
 
-### Hazard Exposure Calculation
-Child exposure estimates were computed within a **Google Earth Engine** framework by spatially intersecting high-resolution demographic rasters (**WorldPop**, <18 years) with a suite of climate hazard layers. The analysis followed a three-stage protocol:
+This folder contains the local Python pipeline that computes all CCRI scores from pre-processed hazard exposure and vulnerability data.
 
-* **Binary Masking**: Continuous hazard datasets (e.g., flood depth, drought indices, heatwave duration) were converted into binary exposure masks based on defined intensity thresholds.
-* **Thematic Aggregation**: Individual hazard masks were consolidated into thematic composites (e.g., Heatwave, Drought) and a cumulative **multi-hazard coincidence layer**, representing the spatial overlap of up to 16 distinct stressors.
-* **Zonal Statistics**: Total exposed child populations were quantified via zonal summation across administrative boundaries, effectively stratifying risk by individual hazard, thematic category, and multi-hazard intensity.
-
-**Script**: `pop_exposure.ipynb`
+**Run:** `python script/data_processing/ccri_pipeline.py`  
+**Config:** `script/data_processing/config.yaml`  
+**Environment:** `.venv` at repo root (`source .venv/bin/activate`)
 
 ---
 
-### Exposure Normalization & Scoring
-To ensure comparability across disparate hazard types and demographic scales, raw exposure data were transformed into normalized risk indices (scale 1–10) using a dual-metric approach:
+## Scripts
 
-* **Absolute Exposure Index**: Raw exposed population counts underwent **logarithmic transformation ($log_{10}$)** to mitigate skewness inherent in demographic distributions. The transformed values were clipped to pre-calculated global thresholds (derived from the distribution’s tail ends) and normalized to a 1–10 scale using Min-Max scaling.
-* **Relative Exposure Index**: This metric quantifies the proportion of the child population exposed ($Exposed / Total$). The resulting percentages were similarly clipped to robust min-max thresholds to handle outliers before being scaled to the standard 1–10 range.
-* **Consistency Validation**: A logic check ensured alignment between metrics; if an administrative unit registered zero absolute exposure, its relative exposure score was forcibly set to zero to prevent statistical artifacts.
+### `ccri_pipeline.py`
 
-**Script**: `pillar1_processing.ipynb`
+Runs five sequential steps. Each step reads from intermediate files written by the previous step.
 
----
-
-### Vulnerability Index Construction
-The construction of the vulnerability index follows a four-stage statistical protocol:
-
-* **Iterative Outlier Suppression**: To mitigate the influence of extreme values in socio-economic data, an **iterative trimming algorithm** is applied. This process recursively removes minimum and maximum values until the dataset achieves a skewness $\le$ 2 and kurtosis $\le$ 3.5, ensuring that the final distribution is statistically stable without compromising data integrity.
-* **Directional Normalization**: Indicators are normalized to a standardized 0–10 scale using Min-Max scaling. For "positive" indicators where higher values imply *lower* vulnerability (e.g., *Skilled birth coverage*, *School completion rate*), a **reverse normalization** ($10 - Value_{norm}$) is applied to align all metrics so that higher scores consistently represent **higher vulnerability**.
-* **Domain-Specific Aggregation**: Normalized indicators are grouped into seven core domains: **Health, Nutrition, WASH, Education, Child Protection, Poverty, and Survival**. A domain score is calculated as the arithmetic mean of its constituent indicators, ensuring that each thematic area contributes equally to the final profile.
-* **Composite Vulnerability Scoring**: The final Pillar 2 score is derived from the arithmetic mean of the seven domain scores. This hierarchical aggregation prevents indicators in data-rich domains from overpowering those in data-sparse domains, providing a balanced assessment of multi-dimensional child vulnerability.
-
-**Script**: `pillar2_processing.ipynb`
+| Step | Function | Description |
+|---|---|---|
+| 1 | `run_pillar1()` | Normalize hazard exposure to 1–10; apply force-null overrides |
+| 2 | `run_pillar2()` | Normalize vulnerability indicators to 0–10; compute domain means |
+| 3 | `run_aggregation()` | Group geometric means → P1/P2 composite scores |
+| 4 | `run_quadrant()` | Classify countries into 4 quadrants by P1/P2 vs. global median |
+| 5 | `run_formatting()` | Merge all layers, apply MHI/MHC, rename columns, write final GeoJSON |
 
 ---
 
-### Composite Index Construction & Geospatial Integration
-The final Children's Climate Risk Index (CCRI) was derived through a multi-stage geometric aggregation protocol, designed to limit substitutability between Exposure (Pillar 1) and Vulnerability (Pillar 2).
+### `config.yaml`
 
-* **Pillar 1 Aggregation (Exposure)**:
-    * **Hazard Grouping**: Individual hazard indicators were organized into thematic groups (e.g., *Heatwave* comprises frequency, duration, and severity).
-    * **Geometric Mean Calculation**: To balance the influence of absolute (population count) and relative (population share) metrics, the **geometric mean** was computed for each hazard pair. Subsequently, a second-order geometric mean aggregated these hazard-specific scores into a unified **Pillar 1 Exposure Index**, which was Min-Max scaled to a standardized 0–10 range.
+All configuration for the pipeline. Key sections:
 
-* **Composite Risk Calculation**:
-    * The final CCRI score was calculated as the **geometric mean** of the aggregated Pillar 1 (Exposure) and Pillar 2 (Vulnerability) indices. This multiplicative approach ensures that high risk in one dimension cannot be fully compensated by low risk in the other, effectively highlighting "hotspots" where high exposure coincides with critical vulnerability.
-    * *Note*: A negligible epsilon constant was introduced during computation to ensure mathematical stability in the presence of zero values.
+#### `paths`
+All input and output file paths (relative to repo root).
 
-**Script**: `p1_p2_aggregation.ipynb`
+Key inputs:
+- `hazard_exposure_csv` — `data/pillar1_data/Hazard_Population_Exposure.csv` (from Stage 2)
+- `p1_min_max_csv` / `p2_min_max_csv` — fixed global normalization ranges
+- `pillar2_data_dir` — directory of `P2_*.csv` vulnerability indicator files
+- `adm0_geojson` — country boundaries with ISO3 and type (State/Territory)
+
+Key outputs (intermediate and final):
+- `merged_exposure_csv` — normalized P1 data
+- `p2_merged_csv` — normalized P2 data
+- `p1_group_mean_csv`, `p2_group_mean_csv` — component-level scores
+- `p1_p2_avg_csv` — composite CCRI scores per country
+- `quadrant_csv` — P1/P2 quadrant classification
+- `ccri_format_geojson` — **final output** with all columns
+
+#### `pillar1`
+- `normalization_range: [1, 10]` — absolute and relative exposure normalized to this range
+- `absolute_log_threshold: 100` — absolute exposure values ≤ 100 floored to 0.1 before log₁₀
+- `zero_fill_cols` — hazards where NaN child exposure is treated as 0 (no population exposed)
+- `force_null` — country-hazard pairs forced to null (see below)
+- `hazard_groups` — groups of individual hazard indicators that are aggregated by geometric mean into a single group score (used for P1 composite)
+- `p1_score_range: [0, 10]` — final P1 score range after group aggregation
+
+#### `pillar2`
+- `normalization_range: [0, 10]`
+- `time_period_min: 2015` — only data from 2015 onward is used
+- `coverage_threshold: 0.4` — countries with fewer than 40% of P2 indicators present get no P2 score
+- `reverse_columns` — indicators where higher raw value = better outcome; reversed after normalization so 10 = most vulnerable
+- `domains` — 7 domain groupings: health, nutrition, wash, education, protection, poverty, survival; each domain score = arithmetic mean of its indicators
+
+#### `formatting`
+- `exclude_iso3: [PSE, NIC]` — these countries are retained in the output but all data columns are set to null
+- `mhi_abs_cols` — MHI/MHC absolute exposure columns capped at `u18_pop` to correct raster aggregation artifacts
+- `p1_col_renames`, `p2_col_renames` — maps from full indicator names to short column codes used in the final GeoJSON
+- `p1_component_renames`, `p2_component_renames` — maps from group/domain names to `P1_xxx` / `P2_xxx` column codes
+- `output_columns` — ordered list of all columns in the final GeoJSON (162 total)
 
 ---
 
-### Final Data Integration & Formatting Protocol
-This protocol systematically merges processed Exposure (Pillar 1), Vulnerability (Pillar 2), and auxiliary metadata (World Bank income, fragility status) into a single master dataset.
+## Null handling and force_null
 
-* **Standardization**: Implements a comprehensive **nomenclature harmonization strategy**, renaming verbose variables to standardized alphanumeric codes for schema consistency.
-* **Constraint Enforcement**: Applies logical validation rules to **cap absolute exposure values** at the total under-18 population limit, correcting for potential raster aggregation artifacts.
-* **Output Generation**: Exports a topologically valid, fully attributed **GeoJSON** optimized for dashboard deployment and strategic analysis.
+Countries where a specific hazard model produces unreliable results are forced to null via `force_null` in `config.yaml`:
 
-**Script**: `ccri_formatting.ipynb`
+| Country | Hazard forced null |
+|---|---|
+| Fiji (FJI) | River flood |
+| FSM, KIR, NIU, PLW, PNG, MHL, WSM, SLB, TON, TUV, VUT | Coastal flood |
+
+**Propagation chain:**
+1. `run_pillar1()` sets the normalized columns (e.g. `river_flood_absolute`, `river_flood_relative`) to NaN for the affected country
+2. `run_aggregation()` computes the group geometric mean — NaN in any component propagates to NaN group score
+3. NaN group score propagates to `P1_geometric_avg = NaN`
+4. `run_quadrant()` excludes countries with NaN P1 — no quadrant assigned
+5. `run_formatting()` nulls all MHI/MHC columns for any country with `P1_geometric_avg = NaN`
+6. Raw abs/rel columns for the forced-null hazard are also set to null in the final output
+
+---
+
+## Output
+
+**`data/misc/CCRI_P1_P2_format.geojson`**
+
+229 countries (195 States + 34 Territories), 162 columns:
+
+- `iso3`, `adm_name`, `total_pop`, `u18_pop`, `wb_income`, `unicef_ro`, `type`, `fragile`
+- Per-hazard raw and normalized exposure: `{code}_abs`, `{code}_rel`, `{code}_abs_norm`, `{code}_rel_norm` (16 hazards × 4 = 64 columns)
+- Per-indicator vulnerability: `{code}`, `{code}_norm` (17 indicators × 2 = 34 columns)
+- P1 group component scores: `P1_rfl`, `P1_cfl`, `P1_ts`, `P1_dr`, `P1_hw`, `P1_ext`, `P1_fr`, `P1_sds`, `P1_pm25`, `P1_mal`
+- P2 domain scores: `P2_hea`, `P2_nut`, `P2_wash`, `P2_edu`, `P2_pro`, `P2_pov`, `P2_sur`
+- `P1_geometric_avg`, `P2_arithmetic_avg`, `P2_missing_val`
+- MHI: `mhi_TH75/80/85/90/95_abs/rel` (10 columns)
+- MHC: `mhc_ge1–8_abs/rel` (16 columns)
+- Topic exposures: `drought_topic_abs/rel`, `heatwave_topic_abs/rel`, `fire_topic_abs/rel`
+- `CCRI_Quadrant`

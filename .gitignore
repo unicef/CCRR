@@ -1,0 +1,20 @@
+# Large reference / intermediate files
+data/misc/adm0.geojson
+data/misc/p1_p2_avg_ccri.geojson
+
+# Pixel rasters
+data/misc/ccri_pixel/
+data/CCRI_results_misc/*.tif
+data/CCRI_results_misc/*.aux.xml
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS / editor
+.DS_Store
+misc/~*.tmp

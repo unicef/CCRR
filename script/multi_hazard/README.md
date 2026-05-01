@@ -1,21 +1,58 @@
-# Multi-Hazard Index
+# multi_hazard — MHI Pixel Raster Construction
 
-### Multi-Hazard Intensity (MHI) Index Construction
-* **Metric**: Variance-Weighted Intensity Score (Scale 0–10)
-* **Methodology**: This module generates a pixel-level composite index of climate hazard intensity using a data-driven dimensionality reduction approach.
-    * **Preprocessing**: Raw hazard rasters undergo **logarithmic stabilization** ($\log(1+x)$) to mitigate skewness, followed by **Z-score standardization** to ensure unit comparability across diverse physical variables (e.g., flood depth vs. heatwave duration).
-    * **Dimensionality Reduction**: A **Principal Component Analysis (PCA)** is applied to the stacked raster assembly to extract the dominant modes of variance.
-    * **Variance-Weighted Aggregation**: The final intensity score is computed by projecting the original hazard layers onto a weighted vector derived from the top Principal Components (explaining ~85-95% of variance). This ensures that the most statistically significant hazard drivers contribute proportionally to the final index.
-    * **Normalization**: The resulting composite scores are Min-Max scaled to a standardized 0–10 range and exported as a high-resolution GeoTIFF.
-* **Script**: `mhi_construction.ipynb`
+This folder contains scripts for building the **Multi-Hazard Intensity (MHI)** index — a pixel-level composite score (0–10) capturing the combined intensity of climate hazards across all land areas. This is Stage 1 of the pipeline.
 
-
+The **Multi-Hazard Category (MHC)** — a count of how many hazard types affect a location — is computed downstream in `script/data_prep/hazard_exposure_new.ipynb` as part of the country-level exposure step.
 
 ---
 
-### Multi-Hazard Coincidence (MHC) Analysis
-* **Metric**: Cumulative Thematic Hazard Count (Range: 0–8)
-* **Methodology**: To quantify the spatial overlap of disparate climate stressors without artificially inflating risk via correlated indicators (e.g., *Heatwave Frequency* vs. *Duration*), the script implements a two-stage aggregation logic:
-    1. **Thematic Aggregation**: Individual hazard layers are first grouped into 8 distinct **Thematic Domains** (e.g., *Drought, Heatwave, Flood*). Within each domain, a **spatial union** is applied—if a pixel exceeds the threshold for *any* sub-indicator (e.g., frequency or severity), the entire domain is flagged as active.
-    2. **Spatial Coincidence Counting**: The binary masks of these 8 thematic domains are stacked and summed pixel-wise. The resulting integer raster represents the number of concurrent hazard types affecting a specific location.
-* **Script**: `mhc_construction.js`
+## Scripts
+
+### `MHI_input_gee.js`
+GEE JavaScript script that exports all hazard rasters needed for MHI construction.
+
+- Exports 13 hazard rasters + a land-sea mask as GeoTIFFs at ~0.1° resolution (ERA5 native scale)
+- Output folder: `ccri_pixel` on Google Drive → moved to `data/misc/ccri_pixel/`
+- Reference projection: `projects/unicef-ccri/assets/ERA5_100yr_RP`
+
+**Excluded from MHI:** air pollution (PM2.5) and malaria (Pf, Pv) — these are health-based indicators unsuitable for the intensity PCA.
+
+---
+
+### `mhi_construction.ipynb`
+Builds the MHI raster from the exported TIFs using PCA-based aggregation.
+
+**Inputs:** `data/misc/ccri_pixel/*.tif` (13 hazard TIFs + `landSeaMask.tif`)
+
+**Steps:**
+1. Load each hazard raster; mask ocean pixels using `landSeaMask.tif`
+2. Extract land pixels only; fill NaN → 0 (no-data treated as zero exposure)
+3. Apply log-transform (`log1+x`) then z-score normalization — fitted on land pixels only
+4. Stack all layers; run PCA; compute variance-weighted loading vector from top 6 components (~85–95% of variance)
+5. Project land pixels onto loading vector; MinMax scale to 0–10
+6. Write output raster (land pixels = 0–10 score, ocean = NaN)
+
+**Output:** `data/CCRI_results_misc/MHI_climate.tif`
+
+After generation, the raster is manually uploaded to GEE as:
+`projects/unicef-ccri/assets/hazards/MHI_climate`
+
+---
+
+## Hazard layers used in MHI
+
+| File | Hazard |
+|---|---|
+| `river_flood_100yr_jrc_2024.tif` | River flood |
+| `coastal_flood_100yr_jrc_2024.tif` | Coastal flood |
+| `tropical_storm_100yr_giri_2024.tif` | Tropical storm |
+| `agricultural_drought_fao_1984-2023.tif` | Agricultural drought |
+| `drought_spei_terraclimate_1958-2025.tif` | Meteorological drought (SPEI) |
+| `drought_spi_terraclimate_1958-2025.tif` | Meteorological drought (SPI) |
+| `heatwave_frequency_ecmwf_2014-2024.tif` | Heatwave frequency |
+| `heatwave_duration_ecmwf_2014-2024.tif` | Heatwave duration |
+| `heatwave_severity_ecmwf_2014-2024.tif` | Heatwave severity |
+| `extreme_heat_ecmwf_2014-2024.tif` | Extreme heat degree-days |
+| `fire_FRP_nasa_2001-2024.tif` | Fire radiative power |
+| `fire_frequency_nasa_2001-2023.tif` | Fire frequency |
+| `sand_dust_storm_unccd_2024.tif` | Sand and dust storm |
