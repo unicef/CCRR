@@ -411,9 +411,8 @@ def run_formatting():
 
     adm0_unique = adm0_attrs.merge(adm0_geom, on='ISO3', how='left')
 
-    # Keep only State and Territory; use adm0 as the left side so all are retained
-    # even if they have no P1/P2 data
-    adm0_unique = adm0_unique[adm0_unique['type'].isin(['State', 'Territory'])]
+    # Keep all entity types except Antarctica
+    adm0_unique = adm0_unique[adm0_unique['type'] != 'Antarctica']
     df_combined = gpd.GeoDataFrame(
         adm0_unique.merge(df_w_childpop, on='ISO3', how='left'),
         geometry='geometry', crs='EPSG:4326'
@@ -507,6 +506,12 @@ def run_formatting():
     fragile['fragile'] = 'fragile'
     df_combined = df_combined.merge(fragile[['ISO3', 'fragile']], on='ISO3', how='left')
 
+    # SIDS and LLDC categorical columns (ISO3 not yet renamed to iso3 at this point)
+    sids_set = set(cfg['sids_iso3'])
+    lldc_set = set(cfg.get('lldc_iso3', []))
+    df_combined['sids'] = df_combined['ISO3'].apply(lambda x: 'SIDS' if x in sids_set else None)
+    df_combined['lldc'] = df_combined['ISO3'].apply(lambda x: 'LLDC' if x in lldc_set else None)
+
     # P1 + P2 components
     p1_components = p1_components.rename(columns=fmt_cfg['p1_component_renames'])
     p2_components = p2_components.rename(columns=fmt_cfg['p2_component_renames'])
@@ -546,9 +551,39 @@ def run_formatting():
         if col in df_combined.columns:
             df_combined[col] = np.minimum(df_combined[col], df_combined['u18_pop'])
 
+    # Force P1 overall null for specific countries (individual hazard scores kept)
+    for iso3_code in fmt_cfg.get('force_null_p1', []):
+        mask = df_combined['iso3'] == iso3_code
+        for col in df_combined.columns:
+            if col.startswith('P1_'):
+                df_combined.loc[mask, col] = np.nan
+
+    # Force P2 overall null for specific countries (individual P2 indicators kept)
+    for iso3_code in fmt_cfg.get('force_null_p2_overall', []):
+        mask = df_combined['iso3'] == iso3_code
+        if 'P2_arithmetic_avg' in df_combined.columns:
+            df_combined.loc[mask, 'P2_arithmetic_avg'] = np.nan
+
     # Null MHI and MHC for countries where P1 is null (any hazard forced null propagates here)
     mhi_mhc_cols = [c for c in df_combined.columns if c.startswith('mhi_') or c.startswith('mhc_')]
     df_combined.loc[df_combined['P1_geometric_avg'].isna(), mhi_mhc_cols] = np.nan
+
+    # Null all data for Sovereignty unsettled entities
+    sov_mask = df_combined['type'] == 'Sovereignty unsettled'
+    id_cols_sov = {'iso3', 'adm_name', 'wb_income', 'unicef_ro', 'ucode', 'uuid', 'geometry', 'type'}
+    for col in df_combined.columns:
+        if col not in id_cols_sov:
+            df_combined.loc[sov_mask, col] = np.nan
+
+    # For non-State/Territory entities: keep raw exposure (abs/rel) but null all scores/normalized columns
+    territory_types = {'Non-Self Governing Territory', 'Self Governing Territory', 'Special Region or Province'}
+    territory_mask = df_combined['type'].isin(territory_types)
+    score_cols = [c for c in df_combined.columns if
+                  c.endswith('_norm') or c.endswith('_abs_norm') or c.endswith('_rel_norm')
+                  or c.startswith('P1_') or c.startswith('P2_')
+                  or c.startswith('mhi_') or c.startswith('mhc_')]
+    for col in score_cols:
+        df_combined.loc[territory_mask, col] = np.nan
 
     # Null raw abs/rel exposure columns for force_null countries (mirrors P1 normalized nulls)
     p1_short = fmt_cfg['p1_col_renames']
@@ -569,7 +604,7 @@ def run_formatting():
 
     # For excluded countries: keep rows in the output but null all analytical columns
     id_cols = {'iso3', 'adm_name', 'total_pop', 'u18_pop', 'wb_income', 'unicef_ro',
-               'ucode', 'uuid', 'geometry', 'type', 'fragile'}
+               'ucode', 'uuid', 'geometry', 'type', 'fragile', 'sids', 'lldc'}
     data_cols = [c for c in df_combined.columns if c not in id_cols]
     df_combined.loc[df_combined['iso3'].isin(exclude_iso3), data_cols] = np.nan
 

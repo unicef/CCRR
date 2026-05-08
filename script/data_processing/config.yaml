@@ -6,6 +6,42 @@ options:
   include_sids: True   # Set to false to exclude all SIDS countries from processing
 
 # SIDS ISO3 codes (Small Island Developing States – Countries of High/Special Concern)
+# LLDC ISO3 codes (Landlocked Developing Countries – UN official list)
+lldc_iso3:
+  - AFG   # Afghanistan
+  - ARM   # Armenia
+  - AZE   # Azerbaijan
+  - BTN   # Bhutan
+  - BOL   # Bolivia
+  - BWA   # Botswana
+  - BFA   # Burkina Faso
+  - BDI   # Burundi
+  - CAF   # Central African Republic
+  - TCD   # Chad
+  - SWZ   # Eswatini
+  - ETH   # Ethiopia
+  - KAZ   # Kazakhstan
+  - KGZ   # Kyrgyzstan
+  - LAO   # Lao PDR
+  - LSO   # Lesotho
+  - LIE   # Liechtenstein
+  - MWI   # Malawi
+  - MLI   # Mali
+  - MNG   # Mongolia
+  - NPL   # Nepal
+  - NER   # Niger
+  - MKD   # North Macedonia
+  - PRY   # Paraguay
+  - MDA   # Republic of Moldova
+  - RWA   # Rwanda
+  - SSD   # South Sudan
+  - TJK   # Tajikistan
+  - TKM   # Turkmenistan
+  - UGA   # Uganda
+  - UZB   # Uzbekistan
+  - ZMB   # Zambia
+  - ZWE   # Zimbabwe
+
 sids_iso3:
   - ATG   # Antigua and Barbuda
   - BHS   # Bahamas
@@ -125,6 +161,10 @@ pillar1:
     MHL:
       - coastal_flood_absolute
       - coastal_flood_relative
+      - fire_FRP_absolute
+      - fire_FRP_relative
+      - fire_frequency_absolute
+      - fire_frequency_relative
     WSM:
       - coastal_flood_absolute
       - coastal_flood_relative
@@ -137,9 +177,46 @@ pillar1:
     TUV:
       - coastal_flood_absolute
       - coastal_flood_relative
+      - fire_FRP_absolute
+      - fire_FRP_relative
+      - fire_frequency_absolute
+      - fire_frequency_relative
     VUT:
       - coastal_flood_absolute
       - coastal_flood_relative
+    CPV:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+    MDV:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+      - fire_FRP_absolute
+      - fire_FRP_relative
+      - fire_frequency_absolute
+      - fire_frequency_relative
+    MUS:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+    NRU:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+      - fire_FRP_absolute
+      - fire_FRP_relative
+      - fire_frequency_absolute
+      - fire_frequency_relative
+      - air_pollution_absolute
+      - air_pollution_relative
+    SYC:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+    LIE:
+      - fire_FRP_absolute
+      - fire_FRP_relative
+      - fire_frequency_absolute
+      - fire_frequency_relative
+    MCO:
+      - air_pollution_absolute
+      - air_pollution_relative
 
   # Hazard groups for geometric-mean aggregation (P1 score)
   hazard_groups:
@@ -189,8 +266,14 @@ pillar2:
 
 # ── CCRI formatting ───────────────────────────────────────────────────────────
 formatting:
-  # Countries to exclude from the final output
-  exclude_iso3: [PSE, NIC]
+  # Countries to exclude from the final output (rows retained, all data columns nulled)
+  exclude_iso3: [PSE, NIC, VAT]
+
+  # Countries where P1 overall score is forced null (individual hazard scores kept)
+  force_null_p1: []
+
+  # Countries where P2 overall score is forced null (individual P2 indicators kept)
+  force_null_p2_overall: [GRD, PLW, ATG]
 
   # Exposure columns whose absolute values are capped at u18_pop
   mhi_abs_cols:
@@ -283,6 +366,8 @@ formatting:
     - geometry
     - type
     - fragile
+    - sids
+    - lldc
     - rfl_abs
     - rfl_rel
     - rfl_abs_norm
@@ -433,4 +518,3 @@ formatting:
     - heatwave_topic_rel
     - fire_topic_abs
     - fire_topic_rel
-    - CCRI_Quadrant
