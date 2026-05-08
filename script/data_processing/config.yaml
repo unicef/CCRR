@@ -143,32 +143,12 @@ pillar1:
     FJI:
       - river_flood_absolute
       - river_flood_relative
-    FSM:
-      - coastal_flood_absolute
-      - coastal_flood_relative
-    KIR:
-      - coastal_flood_absolute
-      - coastal_flood_relative
-    NIU:
-      - coastal_flood_absolute
-      - coastal_flood_relative
-    PLW:
-      - coastal_flood_absolute
-      - coastal_flood_relative
-    PNG:
-      - coastal_flood_absolute
-      - coastal_flood_relative
     MHL:
-      - coastal_flood_absolute
-      - coastal_flood_relative
       - fire_FRP_absolute
       - fire_FRP_relative
       - fire_frequency_absolute
       - fire_frequency_relative
     WSM:
-      - coastal_flood_absolute
-      - coastal_flood_relative
-    SLB:
       - coastal_flood_absolute
       - coastal_flood_relative
     TON:
@@ -181,9 +161,6 @@ pillar1:
       - fire_FRP_relative
       - fire_frequency_absolute
       - fire_frequency_relative
-    VUT:
-      - coastal_flood_absolute
-      - coastal_flood_relative
     CPV:
       - coastal_flood_absolute
       - coastal_flood_relative
