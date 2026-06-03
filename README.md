@@ -97,21 +97,21 @@ A single Python script that runs five sequential steps:
 
 | Step | Function | Output |
 |---|---|---|
-| 1 | Pillar 1 processing — normalize hazard exposure, apply force-null overrides | `data/misc/Merged_Exposure_Data.csv` |
-| 2 | Pillar 2 processing — normalize vulnerability indicators, compute domain averages | `data/misc/P2_Merged_Normalized_avg.csv`, `data/misc/p2_group_mean.csv` |
-| 3 | P1 + P2 aggregation — group geometric means, combined CCRI score | `data/misc/p1_group_mean.csv`, `data/misc/p1_p2_avg_ccri.csv` |
-| 4 | Quadrant classification — classify countries by P1/P2 relative to global median | `data/misc/ccri_quadrant_table.csv` |
-| 5 | Formatting — merge all layers, apply MHI/MHC, produce final GeoJSON | `data/misc/CCRI_P1_P2_format.geojson` |
+| 1 | Pillar 1 processing — normalize hazard exposure, apply force-null overrides | `misc/Merged_Exposure_Data.csv` |
+| 2 | Pillar 2 processing — normalize vulnerability indicators, compute domain averages | `misc/P2_Merged_Normalized_avg.csv`, `misc/p2_group_mean.csv` |
+| 3 | P1 + P2 aggregation — group geometric means, combined CCRI score | `misc/p1_group_mean.csv`, `misc/p1_p2_avg_ccri.csv` |
+| 4 | Quadrant classification — classify countries by P1/P2 relative to global median | `misc/ccri_quadrant_table.csv` |
+| 5 | Formatting — merge all layers, apply MHI/MHC, produce final GeoJSON | `misc/CCRR_output.geojson` |
 
 **Key inputs:**
 - `Country_level_hazard_exposure/Hazard_Population_Exposure.csv`
 - `Vulnerability_data/P2_*.csv`
 - `misc/adm0.geojson`, `misc/adm0_boundaries_simple.geojson`
-- `CCRR_Pipeline/p1_min_max.csv`, `CCRR_Pipeline/p2_min_max.csv`
+- `misc/p1_min_max.csv`, `misc/p2_min_max.csv`
 - `misc/WB_INCOME.csv`, `misc/UNICEF_PROG_REG_GLOBAL.csv`
 - `misc/List of fragile context (2025).csv`
 
-**Final output:** `misc/CCRI_P1_P2_format.geojson`  
+**Final output:** `misc/CCRR_output.geojson`  
 229 countries (195 States + 34 Territories), 162 columns including all hazard, vulnerability, MHI, MHC, and CCRI scores.
 
 ---

@@ -1,7 +1,7 @@
 """
 CCRI Pipeline
 Runs in order: pillar1 -> pillar2 -> p1_p2_aggregation -> quadrant -> ccri_formatting
-Run from the repo root:  python script/data_processing/ccri_pipeline.py
+Run from the repo root:  python CCRR_Pipeline/ccrr_pipeline.py
 """
 
 import os
@@ -18,7 +18,7 @@ from sklearn.preprocessing import MinMaxScaler
 # ── Config ────────────────────────────────────────────────────────────────────
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-REPO_ROOT  = os.path.abspath(os.path.join(SCRIPT_DIR, '..', '..'))
+REPO_ROOT  = os.path.abspath(os.path.join(SCRIPT_DIR, '..'))
 CONFIG_PATH = os.path.join(SCRIPT_DIR, 'config.yaml')
 
 with open(CONFIG_PATH) as f:
@@ -149,7 +149,7 @@ def run_pillar2():
     domains     = p2_cfg['domains']
     exclude_iso3 = set() if cfg['options']['include_sids'] else set(cfg['sids_iso3'])
 
-    dest_folder = p(cfg['paths']['merged_exposure_csv']).rsplit('/', 1)[0]  # data/misc
+    dest_folder = p(cfg['paths']['merged_exposure_csv']).rsplit('/', 1)[0]  # misc/
     csv_files   = glob.glob(os.path.join(p(cfg['paths']['pillar2_data_dir']), '*.csv'))
     df_min_max  = pd.read_csv(p(cfg['paths']['p2_min_max_csv']))
     df_min_max['filename'] = df_min_max['filename'].astype(str).str.strip()

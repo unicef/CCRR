@@ -90,7 +90,7 @@ Countries where a specific hazard model produces unreliable results are forced t
 
 ## Output
 
-**`misc/CCRI_P1_P2_format.geojson`**
+**`misc/CCRR_output.geojson`**
 
 229 countries (195 States + 34 Territories), 162 columns:
 

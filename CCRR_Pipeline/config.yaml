@@ -86,32 +86,32 @@ sids_iso3:
 
 paths:
   # Input boundaries / reference
-  adm0_geojson:              data/misc/adm0.geojson
-  adm0_simple_geojson:       data/misc/adm0_boundaries_simple.geojson
-  georepo_gpkg:              data/misc/georepo_adm0.gpkg
+  adm0_geojson:              misc/adm0.geojson
+  adm0_simple_geojson:       misc/adm0_boundaries_simple.geojson
+  georepo_gpkg:              misc/georepo_adm0.gpkg
 
   # Input hazard / vulnerability data
-  hazard_exposure_csv:       data/pillar1_data/Hazard_Population_Exposure.csv
-  p1_min_max_csv:            data/misc/p1_min_max.csv
-  p2_min_max_csv:            data/misc/p2_min_max.csv
-  pillar2_data_dir:          data/pillar2_data
-  wb_income_csv:             data/misc/WB_INCOME.csv
-  unicef_ro_csv:             data/misc/UNICEF_PROG_REG_GLOBAL.csv
-  child_pop_csv:             data/misc/child_pop_sum_adm0.csv
-  fragile_csv:               "data/misc/List of fragile context (2025).csv"
-  multi_hazard_glob:         "data/misc/Multi_Hazard_intensity_Exposure_adm0_TH_Percentile*.csv"
+  hazard_exposure_csv:       Country_level_hazard_exposure/Hazard_Population_Exposure.csv
+  p1_min_max_csv:            misc/p1_min_max.csv
+  p2_min_max_csv:            misc/p2_min_max.csv
+  pillar2_data_dir:          Vulnerability_data
+  wb_income_csv:             misc/WB_INCOME.csv
+  unicef_ro_csv:             misc/UNICEF_PROG_REG_GLOBAL.csv
+  child_pop_csv:             misc/child_pop_sum_adm0.csv
+  fragile_csv:               "misc/List of fragile context (2025).csv"
+  multi_hazard_glob:         "misc/Multi_Hazard_intensity_Exposure_adm0_TH_Percentile*.csv"
 
   # Intermediate outputs
-  merged_exposure_csv:       data/misc/Merged_Exposure_Data.csv
-  p2_merged_csv:             data/misc/P2_Merged_Normalized_avg.csv
-  p1_group_mean_csv:         data/misc/p1_group_mean.csv
-  p2_group_mean_csv:         data/misc/p2_group_mean.csv
-  p1_p2_avg_csv:             data/misc/p1_p2_avg_ccri.csv
-  p1_p2_avg_geojson:         data/misc/p1_p2_avg_ccri.geojson
+  merged_exposure_csv:       misc/Merged_Exposure_Data.csv
+  p2_merged_csv:             misc/P2_Merged_Normalized_avg.csv
+  p1_group_mean_csv:         misc/p1_group_mean.csv
+  p2_group_mean_csv:         misc/p2_group_mean.csv
+  p1_p2_avg_csv:             misc/p1_p2_avg_ccri.csv
+  p1_p2_avg_geojson:         misc/p1_p2_avg_ccri.geojson
 
   # Final outputs
-  quadrant_csv:              data/misc/ccri_quadrant_table.csv
-  ccri_format_geojson:       data/misc/CCRI_P1_P2_format.geojson
+  quadrant_csv:              misc/ccri_quadrant_table.csv
+  ccri_format_geojson:       misc/CCRR_output.geojson
 
 
 # ── Pillar 1 processing ───────────────────────────────────────────────────────
