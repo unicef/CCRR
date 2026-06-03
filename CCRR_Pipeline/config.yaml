@@ -1,0 +1,497 @@
+# CCRI Pipeline Configuration
+# All paths are relative to the repository root.
+
+# ── Pipeline options ──────────────────────────────────────────────────────────
+options:
+  include_sids: True   # Set to false to exclude all SIDS countries from processing
+
+# SIDS ISO3 codes (Small Island Developing States – Countries of High/Special Concern)
+# LLDC ISO3 codes (Landlocked Developing Countries – UN official list)
+lldc_iso3:
+  - AFG   # Afghanistan
+  - ARM   # Armenia
+  - AZE   # Azerbaijan
+  - BTN   # Bhutan
+  - BOL   # Bolivia
+  - BWA   # Botswana
+  - BFA   # Burkina Faso
+  - BDI   # Burundi
+  - CAF   # Central African Republic
+  - TCD   # Chad
+  - SWZ   # Eswatini
+  - ETH   # Ethiopia
+  - KAZ   # Kazakhstan
+  - KGZ   # Kyrgyzstan
+  - LAO   # Lao PDR
+  - LSO   # Lesotho
+  - LIE   # Liechtenstein
+  - MWI   # Malawi
+  - MLI   # Mali
+  - MNG   # Mongolia
+  - NPL   # Nepal
+  - NER   # Niger
+  - MKD   # North Macedonia
+  - PRY   # Paraguay
+  - MDA   # Republic of Moldova
+  - RWA   # Rwanda
+  - SSD   # South Sudan
+  - TJK   # Tajikistan
+  - TKM   # Turkmenistan
+  - UGA   # Uganda
+  - UZB   # Uzbekistan
+  - ZMB   # Zambia
+  - ZWE   # Zimbabwe
+
+sids_iso3:
+  - ATG   # Antigua and Barbuda
+  - BHS   # Bahamas
+  - BRB   # Barbados
+  - BLZ   # Belize
+  - CPV   # Cape Verde
+  - COM   # Comoros
+  - COK   # Cook Islands
+  - CUB   # Cuba
+  - DMA   # Dominica
+  - DOM   # Dominican Republic
+  - FJI   # Fiji
+  - GRD   # Grenada
+  - GNB   # Guinea-Bissau
+  - GUY   # Guyana
+  - HTI   # Haiti
+  - JAM   # Jamaica
+  - KIR   # Kiribati
+  - MDV   # Maldives
+  - MHL   # Marshall Islands
+  - MUS   # Mauritius
+  - FSM   # Micronesia (Federated States of)
+  - NRU   # Nauru
+  - NIU   # Niue
+  - PLW   # Palau
+  - PNG   # Papua New Guinea
+  - WSM   # Samoa
+  - STP   # Sao Tome and Principe
+  - SGP   # Singapore
+  - KNA   # Saint Kitts and Nevis
+  - LCA   # Saint Lucia
+  - VCT   # Saint Vincent and the Grenadines
+  - SYC   # Seychelles
+  - SLB   # Solomon Islands
+  - SUR   # Suriname
+  - TLS   # Timor-Leste
+  - TON   # Tonga
+  - TTO   # Trinidad and Tobago
+  - TUV   # Tuvalu
+  - VUT   # Vanuatu
+
+
+paths:
+  # Input boundaries / reference
+  adm0_geojson:              data/misc/adm0.geojson
+  adm0_simple_geojson:       data/misc/adm0_boundaries_simple.geojson
+  georepo_gpkg:              data/misc/georepo_adm0.gpkg
+
+  # Input hazard / vulnerability data
+  hazard_exposure_csv:       data/pillar1_data/Hazard_Population_Exposure.csv
+  p1_min_max_csv:            data/misc/p1_min_max.csv
+  p2_min_max_csv:            data/misc/p2_min_max.csv
+  pillar2_data_dir:          data/pillar2_data
+  wb_income_csv:             data/misc/WB_INCOME.csv
+  unicef_ro_csv:             data/misc/UNICEF_PROG_REG_GLOBAL.csv
+  child_pop_csv:             data/misc/child_pop_sum_adm0.csv
+  fragile_csv:               "data/misc/List of fragile context (2025).csv"
+  multi_hazard_glob:         "data/misc/Multi_Hazard_intensity_Exposure_adm0_TH_Percentile*.csv"
+
+  # Intermediate outputs
+  merged_exposure_csv:       data/misc/Merged_Exposure_Data.csv
+  p2_merged_csv:             data/misc/P2_Merged_Normalized_avg.csv
+  p1_group_mean_csv:         data/misc/p1_group_mean.csv
+  p2_group_mean_csv:         data/misc/p2_group_mean.csv
+  p1_p2_avg_csv:             data/misc/p1_p2_avg_ccri.csv
+  p1_p2_avg_geojson:         data/misc/p1_p2_avg_ccri.geojson
+
+  # Final outputs
+  quadrant_csv:              data/misc/ccri_quadrant_table.csv
+  ccri_format_geojson:       data/misc/CCRI_P1_P2_format.geojson
+
+
+# ── Pillar 1 processing ───────────────────────────────────────────────────────
+pillar1:
+  normalization_range: [1, 10]          # MinMaxScaler range for P1 indicators
+  absolute_log_threshold: 100           # Values <= this are floored to 0.1 before log10
+  absolute_log_floor: 0.1
+
+  # Hazards whose NaN child exposure should be treated as 0
+  zero_fill_cols:
+    - pop_exposed_agricultural_drought_fao_1984-2023
+    - pop_exposed_tropical_storm_100yr_giri_2024
+    - pop_exposed_vectorborne_malariapf_2012-2022
+    - pop_exposed_vectorborne_malariapv_2012-2022
+    - pop_exposed_sand_dust_storm_unccd_2024
+    #- pop_exposed_air_pollution_pm25_1998-2023
+    #- pop_exposed_fire_FRP_nasa_2001-2024
+    #- pop_exposed_fire_frequency_nasa_2001-2023
+    - pop_exposed_river_flood_100yr_jrc_2024
+    - pop_exposed_coastal_flood_100yr_jrc_2024
+    # - pop_exposed_drought_spei_terraclimate_1958-2025
+    # - pop_exposed_drought_spi_terraclimate_1958-2025
+  
+
+  # Manual overrides: force specific hazard columns to null for given countries.
+  # Use the normalized column name (e.g. river_flood_absolute, fire_FRP_relative).
+  # Also nulls the corresponding raw abs/rel columns in the final output.
+  force_null:
+    FJI:
+      - river_flood_absolute
+      - river_flood_relative
+    MHL:
+      - fire_FRP_absolute
+      - fire_FRP_relative
+      - fire_frequency_absolute
+      - fire_frequency_relative
+    WSM:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+    TON:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+    TUV:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+      - fire_FRP_absolute
+      - fire_FRP_relative
+      - fire_frequency_absolute
+      - fire_frequency_relative
+    CPV:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+    MDV:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+      - fire_FRP_absolute
+      - fire_FRP_relative
+      - fire_frequency_absolute
+      - fire_frequency_relative
+    MUS:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+    NRU:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+      - fire_FRP_absolute
+      - fire_FRP_relative
+      - fire_frequency_absolute
+      - fire_frequency_relative
+      - air_pollution_absolute
+      - air_pollution_relative
+    SYC:
+      - coastal_flood_absolute
+      - coastal_flood_relative
+    LIE:
+      - fire_FRP_absolute
+      - fire_FRP_relative
+      - fire_frequency_absolute
+      - fire_frequency_relative
+    MCO:
+      - air_pollution_absolute
+      - air_pollution_relative
+
+  # Hazard groups for geometric-mean aggregation (P1 score)
+  hazard_groups:
+    river_flood:   [river_flood]
+    coastal_flood: [coastal_flood]
+    storm:         [tropical_storm]
+    drought:       [agricultural_drought, drought_spei, drought_spi]
+    heatwave:      [heatwave_frequency, heatwave_duration, heatwave_severity]
+    extreme_heat:  [extreme_heat]
+    fire:          [fire_FRP, fire_frequency]
+    sand_dust:     [sand_dust]
+    air_pollution: [air_pollution]
+    malaria:       [vectorborne_malariapv, vectorborne_malariapf]
+
+  # Final P1 score scaling (applied after group geometric means)
+  p1_score_range: [0, 10]
+
+
+# ── Pillar 2 processing ───────────────────────────────────────────────────────
+pillar2:
+  normalization_range: [0, 10]          # MinMaxScaler range for P2 indicators
+  time_period_min: 2015                 # Earliest year of data to include
+  coverage_threshold: 0.4              # Min fraction of non-missing P2 indicators per country
+
+  # Indicators where higher raw value = better outcome → reversed after normalization
+  reverse_columns:
+    - P2_Skilled_birth_coverage
+    - P2_Lower_secondary_completion_rate
+    - P2_DTP1_access
+    - P2_DTP3_access
+    - P2_At-least_basic_drinking_water
+    - P2_At-least_basic_sanitation
+    - P2_Basic_hygiene
+    - P2_electricity_access
+    - P2_Under_five_covered_by_social_protection
+
+  # Domain groupings for the arithmetic average
+  domains:
+    health:     [P2_DTP1_access, P2_DTP3_access, P2_Skilled_birth_coverage, P2_electricity_access]
+    nutrition:  [P2_Stunting, P2_Child_Food_Poverty]
+    wash:       [P2_At-least_basic_drinking_water, P2_At-least_basic_sanitation, P2_Basic_hygiene]
+    education:  [P2_Lower_secondary_out_of_school, P2_Lower_secondary_completion_rate, P2_Learning_poverty]
+    protection: [P2_Child_labor, P2_Child_marriage]
+    poverty:    [P2_Child_poverty, P2_Under_five_covered_by_social_protection]
+    survival:   [P2_Under_five_mortality]
+
+
+# ── CCRI formatting ───────────────────────────────────────────────────────────
+formatting:
+  # Countries to exclude from the final output (rows retained, all data columns nulled)
+  exclude_iso3: [PSE, NIC, VAT]
+
+  # Countries where P1 overall score is forced null (individual hazard scores kept)
+  force_null_p1: []
+
+  # Countries where P2 overall score is forced null (individual P2 indicators kept)
+  force_null_p2_overall: [GRD, PLW, ATG]
+
+  # Exposure columns whose absolute values are capped at u18_pop
+  mhi_abs_cols:
+    - mhi_TH75_abs
+    - mhi_TH80_abs
+    - mhi_TH85_abs
+    - mhi_TH90_abs
+    - mhi_TH95_abs
+    - mhc_ge1_abs
+    - mhc_ge2_abs
+    - mhc_ge3_abs
+    - mhc_ge4_abs
+    - mhc_ge5_abs
+    - mhc_ge6_abs
+    - mhc_ge7_abs
+    - mhc_ge8_abs
+
+  # P1 hazard column abbreviation map (applied to both abs/rel/norm variants)
+  p1_col_renames:
+    river_flood:            rfl
+    coastal_flood:          cfl
+    tropical_storm:         ts
+    agricultural_drought:   agdr
+    drought_spei:           metdr_spei
+    drought_spi:            metdr_spi
+    heatwave_frequency:     hw_fre
+    heatwave_severity:      hw_sev
+    heatwave_duration:      hw_dur
+    extreme_heat:           ext
+    fire_frequency:         fr_fre
+    fire_FRP:               fr_int
+    sand_dust:              sds
+    vectorborne_malariapv:  mal_pv
+    vectorborne_malariapf:  mal_pf
+    air_pollution:          pm25
+
+  # P2 indicator column abbreviation map
+  p2_col_renames:
+    P2_DTP1_access:                          hea_dtp1
+    P2_DTP3_access:                          hea_dtp3
+    P2_Skilled_birth_coverage:               hea_skat
+    P2_electricity_access:                   hea_elec
+    P2_Stunting:                             nut_stu
+    P2_Child_Food_Poverty:                   nut_fpov
+    P2_At-least_basic_drinking_water:        wash_wat
+    P2_At-least_basic_sanitation:            wash_san
+    P2_Basic_hygiene:                        wash_hyg
+    P2_Lower_secondary_out_of_school:        edu_lsos
+    P2_Lower_secondary_completion_rate:      edu_lscr
+    P2_Learning_poverty:                     edu_lpov
+    P2_Child_labor:                          pro_lab
+    P2_Child_marriage:                       pro_mar
+    P2_Child_poverty:                        pov_md
+    P2_Under_five_covered_by_social_protection: pov_u5sp
+    P2_Under_five_mortality:                 sur_u5mor
+
+  # P1 component column renames (group means → short codes)
+  p1_component_renames:
+    river_flood_gmean:    P1_rfl
+    coastal_flood_gmean:  P1_cfl
+    storm_gmean:          P1_ts
+    drought_gmean:        P1_dr
+    heatwave_gmean:       P1_hw
+    extreme_heat_gmean:   P1_ext
+    fire_gmean:           P1_fr
+    sand_dust_gmean:      P1_sds
+    air_pollution_gmean:  P1_pm25
+    malaria_gmean:        P1_mal
+
+  # P2 component column renames (domain averages → short codes)
+  p2_component_renames:
+    health:     P2_hea
+    nutrition:  P2_nut
+    wash:       P2_wash
+    education:  P2_edu
+    protection: P2_pro
+    poverty:    P2_pov
+    survival:   P2_sur
+
+  # Final column order for the output GeoJSON
+  output_columns:
+    - iso3
+    - adm_name
+    - total_pop
+    - u18_pop
+    - wb_income
+    - unicef_ro
+    - ucode
+    - uuid
+    - geometry
+    - type
+    - fragile
+    - sids
+    - lldc
+    - rfl_abs
+    - rfl_rel
+    - rfl_abs_norm
+    - rfl_rel_norm
+    - cfl_abs
+    - cfl_rel
+    - cfl_abs_norm
+    - cfl_rel_norm
+    - ts_abs
+    - ts_rel
+    - ts_abs_norm
+    - ts_rel_norm
+    - agdr_abs
+    - agdr_rel
+    - agdr_abs_norm
+    - agdr_rel_norm
+    - metdr_spei_abs
+    - metdr_spei_rel
+    - metdr_spei_abs_norm
+    - metdr_spei_rel_norm
+    - metdr_spi_abs
+    - metdr_spi_rel
+    - metdr_spi_abs_norm
+    - metdr_spi_rel_norm
+    - hw_fre_abs
+    - hw_fre_rel
+    - hw_fre_abs_norm
+    - hw_fre_rel_norm
+    - hw_dur_abs
+    - hw_dur_rel
+    - hw_dur_abs_norm
+    - hw_dur_rel_norm
+    - hw_sev_abs
+    - hw_sev_rel
+    - hw_sev_abs_norm
+    - hw_sev_rel_norm
+    - ext_abs
+    - ext_rel
+    - ext_abs_norm
+    - ext_rel_norm
+    - fr_fre_abs
+    - fr_fre_rel
+    - fr_fre_abs_norm
+    - fr_fre_rel_norm
+    - fr_int_abs
+    - fr_int_rel
+    - fr_int_abs_norm
+    - fr_int_rel_norm
+    - sds_abs
+    - sds_rel
+    - sds_abs_norm
+    - sds_rel_norm
+    - pm25_abs
+    - pm25_rel
+    - pm25_abs_norm
+    - pm25_rel_norm
+    - mal_pv_abs
+    - mal_pv_rel
+    - mal_pv_abs_norm
+    - mal_pv_rel_norm
+    - mal_pf_abs
+    - mal_pf_rel
+    - mal_pf_abs_norm
+    - mal_pf_rel_norm
+    - hea_dtp1
+    - hea_dtp1_norm
+    - hea_dtp3
+    - hea_dtp3_norm
+    - hea_skat
+    - hea_skat_norm
+    - hea_elec
+    - hea_elec_norm
+    - nut_stu
+    - nut_stu_norm
+    - nut_fpov
+    - nut_fpov_norm
+    - wash_wat
+    - wash_wat_norm
+    - wash_san
+    - wash_san_norm
+    - wash_hyg
+    - wash_hyg_norm
+    - edu_lsos
+    - edu_lsos_norm
+    - edu_lscr
+    - edu_lscr_norm
+    - edu_lpov
+    - edu_lpov_norm
+    - pro_lab
+    - pro_lab_norm
+    - pro_mar
+    - pro_mar_norm
+    - pov_md
+    - pov_md_norm
+    - pov_u5sp
+    - pov_u5sp_norm
+    - sur_u5mor
+    - sur_u5mor_norm
+    - P1_rfl
+    - P1_cfl
+    - P1_ts
+    - P1_dr
+    - P1_hw
+    - P1_ext
+    - P1_fr
+    - P1_sds
+    - P1_pm25
+    - P1_mal
+    - P2_hea
+    - P2_nut
+    - P2_wash
+    - P2_edu
+    - P2_pro
+    - P2_pov
+    - P2_sur
+    - P1_geometric_avg
+    - P2_arithmetic_avg
+    - P2_missing_val
+    - mhi_TH75_abs
+    - mhi_TH80_abs
+    - mhi_TH85_abs
+    - mhi_TH95_abs
+    - mhi_TH90_abs
+    - mhc_ge1_abs
+    - mhc_ge2_abs
+    - mhc_ge3_abs
+    - mhc_ge4_abs
+    - mhc_ge5_abs
+    - mhc_ge6_abs
+    - mhc_ge7_abs
+    - mhc_ge8_abs
+    - mhi_TH75_rel
+    - mhi_TH80_rel
+    - mhi_TH85_rel
+    - mhi_TH95_rel
+    - mhi_TH90_rel
+    - mhc_ge1_rel
+    - mhc_ge2_rel
+    - mhc_ge3_rel
+    - mhc_ge4_rel
+    - mhc_ge5_rel
+    - mhc_ge6_rel
+    - mhc_ge7_rel
+    - mhc_ge8_rel
+    - drought_topic_abs
+    - drought_topic_rel
+    - heatwave_topic_abs
+    - heatwave_topic_rel
+    - fire_topic_abs
+    - fire_topic_rel

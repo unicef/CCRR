@@ -8,16 +8,15 @@ This repository contains the data and scripts for constructing the **Children's 
 
 ```
 CCRR/
-├── script/
-│   ├── data_prep/          # Stage 0 & 2: hazard data preparation + country exposure (GEE)
-│   ├── data_processing/    # Stage 3: CCRI pipeline (local Python)
-│   └── multi_hazard/       # Stage 1: Multi-Hazard Intensity (MHI) raster construction
-├── data/
-│   ├── pillar1_data/       # Country-level hazard exposure CSV (main pipeline input)
-│   ├── pillar2_data/       # Child vulnerability indicator CSVs
-│   ├── misc/               # Reference files, normalization ranges, intermediate outputs
-│   └── CCRI_results_misc/  # MHI pixel raster output
-└── misc/                   # Supporting documentation
+├── Hazard_data_preparation/    # Stage 0: links to GCHD hazard prep notebooks
+├── Multi_Hazard_Indicators/
+│   ├── MHI/                    # Stage 1: Multi-Hazard Intensity raster (scripts + data)
+│   ├── MHC/                    # Multi-Hazard Count methodology reference
+│   └── Hazard_combination/     # Country-level co-occurrence analysis
+├── Country_level_hazard_exposure/  # Stage 2: GEE exposure computation + output CSV
+├── Vulnerability_data/         # Pillar 2 vulnerability indicator CSVs + download notebook
+├── CCRR_Pipeline/              # Stage 3: local Python pipeline (ccrr_pipeline.py + config)
+└── misc/                       # Reference boundaries, classification tables, pipeline outputs
 ```
 
 ---
@@ -27,7 +26,7 @@ CCRR/
 The pipeline runs in four sequential stages.
 
 ### Stage 0 — Hazard Data Preparation
-**Location:** `script/data_prep/`  
+**Location:** [`Hazard_data_preparation/`](Hazard_data_preparation/)  
 **Environment:** Google Colab / GEE  
 **Run when:** Source hazard datasets are updated.
 
@@ -47,7 +46,7 @@ Individual notebooks download and process each raw hazard dataset and upload the
 ---
 
 ### Stage 1 — MHI Pixel Raster Construction
-**Location:** `script/multi_hazard/`  
+**Location:** [`Multi_Hazard_Indicators/MHI/`](Multi_Hazard_Indicators/MHI/)  
 **Environment:** GEE (export) + local Python (PCA)  
 **Run when:** Hazard rasters are updated.
 
@@ -55,18 +54,18 @@ Builds the **Multi-Hazard Intensity (MHI)** index — a continuous 0–10 pixel-
 
 | Script | Purpose |
 |---|---|
-| `MHI_input_gee.js` | Exports 13 hazard rasters + land-sea mask from GEE at ~0.1° resolution to `data/misc/ccri_pixel/` |
-| `mhi_construction.ipynb` | Applies log-transform → z-score normalization (land pixels only) → PCA weighting → MinMax scaling; outputs `data/CCRI_results_misc/MHI_climate.tif` |
+| `MHI_input_gee.js` | Exports 13 hazard rasters + land-sea mask from GEE at ~0.1° resolution to `Multi_Hazard_Indicators/MHI/data/ccri_pixel/` |
+| `mhi_construction.ipynb` | Applies log-transform → z-score normalization (land pixels only) → PCA weighting → MinMax scaling; outputs `Multi_Hazard_Indicators/MHI/data/MHI_climate.tif` |
 
 The MHI raster is then uploaded to GEE as `projects/unicef-ccri/assets/hazards/MHI_climate` for use in Stage 2.
 
-**Key inputs:** `data/misc/ccri_pixel/*.tif` (13 hazard TIFs + `landSeaMask.tif`)  
-**Output:** `data/CCRI_results_misc/MHI_climate.tif`
+**Key inputs:** `Multi_Hazard_Indicators/MHI/data/ccri_pixel/*.tif` (13 hazard TIFs + `landSeaMask.tif`)  
+**Output:** `Multi_Hazard_Indicators/MHI/data/MHI_climate.tif`
 
 ---
 
 ### Stage 2 — Country-Level Exposure
-**Location:** `script/data_prep/hazard_exposure_new.ipynb`  
+**Location:** [`Country_level_hazard_exposure/hazard_exposure_new.ipynb`](Country_level_hazard_exposure/hazard_exposure_new.ipynb)  
 **Environment:** GEE (Python API)  
 **Run when:** Hazard assets, MHI asset, or population data are updated.
 
@@ -84,15 +83,15 @@ Computes population-weighted exposure for each country using GEE `reduceRegions`
 - General population: `worldpop_T_2025_CN_100m`
 - Boundaries: `adm0_chunked_500km_shp`
 
-**Output:** `data/pillar1_data/Hazard_Population_Exposure.csv`
+**Output:** `Country_level_hazard_exposure/Hazard_Population_Exposure.csv`
 
 ---
 
-### Stage 3 — CCRI Pipeline
-**Location:** `script/data_processing/`  
+### Stage 3 — CCRR Pipeline
+**Location:** [`CCRR_Pipeline/`](CCRR_Pipeline/)  
 **Environment:** Local Python  
-**Run:** `python script/data_processing/ccri_pipeline.py`  
-**Config:** `script/data_processing/config.yaml`
+**Run:** `python CCRR_Pipeline/ccrr_pipeline.py`  
+**Config:** `CCRR_Pipeline/config.yaml`
 
 A single Python script that runs five sequential steps:
 
@@ -105,14 +104,14 @@ A single Python script that runs five sequential steps:
 | 5 | Formatting — merge all layers, apply MHI/MHC, produce final GeoJSON | `data/misc/CCRI_P1_P2_format.geojson` |
 
 **Key inputs:**
-- `data/pillar1_data/Hazard_Population_Exposure.csv`
-- `data/pillar2_data/P2_*.csv`
-- `data/misc/adm0.geojson`, `data/misc/adm0_boundaries_simple.geojson`
-- `data/misc/p1_min_max.csv`, `data/misc/p2_min_max.csv`
-- `data/misc/WB_INCOME.csv`, `data/misc/UNICEF_PROG_REG_GLOBAL.csv`
-- `data/misc/List of fragile context (2025).csv`
+- `Country_level_hazard_exposure/Hazard_Population_Exposure.csv`
+- `Vulnerability_data/P2_*.csv`
+- `misc/adm0.geojson`, `misc/adm0_boundaries_simple.geojson`
+- `CCRR_Pipeline/p1_min_max.csv`, `CCRR_Pipeline/p2_min_max.csv`
+- `misc/WB_INCOME.csv`, `misc/UNICEF_PROG_REG_GLOBAL.csv`
+- `misc/List of fragile context (2025).csv`
 
-**Final output:** `data/misc/CCRI_P1_P2_format.geojson`  
+**Final output:** `misc/CCRI_P1_P2_format.geojson`  
 229 countries (195 States + 34 Territories), 162 columns including all hazard, vulnerability, MHI, MHC, and CCRI scores.
 
 ---
@@ -138,7 +137,7 @@ A single Python script that runs five sequential steps:
 source .venv/bin/activate
 
 # Run the full pipeline (Steps 1–5)
-python script/data_processing/ccri_pipeline.py
+python CCRR_Pipeline/ccrr_pipeline.py
 ```
 
 Stages 0, 1, and 2 require GEE authentication and are run separately in GEE or Colab environments.

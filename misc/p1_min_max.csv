@@ -1,0 +1,35 @@
+﻿indicator,filename,type,min,max
+Children exposed to riverine floods (absolute),river_flood,abs,2,8
+Children exposed to coastal floods (absolute),coastal_flood,abs,2,8
+Children exposed to pluvial floods (absolute),pluvial_flood,abs,2,8
+Children exposed to tropical storm (absolute),tropical_storm,abs,2,8
+Children exposed to agricultural drought (absolute),agricultural_drought,abs,2,8
+Children exposed to meteorological drought - spi (absolute),drought_spi,abs,2,8
+Children exposed to meteorological drought – spei (absolute),drought_spei,abs,2,8
+Children exposed to fire intensity (absolute),fire_FRP,abs,2,8
+Children exposed to fire frequency (absolute),fire_frequency,abs,2,8
+Children exposed to heatwave frequency (absolute),heatwave_frequency,abs,2,8
+Children exposed to heatwave duration (absolute),heatwave_duration,abs,2,8
+Children exposed to heatwave severity (absolute),heatwave_severity,abs,2,8
+Children exposed to extreme temperature (absolute),extreme_heat,abs,2,8
+Children exposed to sand and dust storm (absolute),sand_dust,abs,2,8
+Children exposed to air pollution (PM2.5) (absolute),air_pollution,abs,2,8
+Children exposed to Malaria P. Falciparum (absolute),vectorborne_malariapf,abs,2,8
+Children exposed to Malaria P. Vivax (absolute),vectorborne_malariapv,abs,2,8
+Children exposed to riverine floods (relative),river_flood,rel,1,50
+Children exposed to coastal floods (relative),coastal_flood,rel,1,10
+Children exposed to pluvial floods (relative),pluvial_flood,rel,1,100
+Children exposed to tropical storm (relative),tropical_storm,rel,1,100
+Children exposed to agricultural drought (relative),agricultural_drought,rel,1,100
+Children exposed to meteorological drought – spi (relative),drought_spi,rel,1,100
+Children exposed to meteorological drought – spe (relative),drought_spei,rel,1,100
+Children exposed to fire intensity (relative),fire_FRP,rel,1,30
+Children exposed to fire frequency (relative),fire_frequency,rel,1,30
+Children exposed to heatwave frequency (relative),heatwave_frequency,rel,1,100
+Children exposed to heatwave duration (relative),heatwave_duration,rel,1,100
+Children exposed to heatwave severity (relative),heatwave_severity,rel,1,100
+Children exposed to extreme temperature (relative),extreme_heat,rel,1,100
+Children exposed to sand and dust storm (relative),sand_dust,rel,1,50
+Children exposed to air pollution (PM2.5) (relative),air_pollution,rel,1,100
+Children exposed to Malaria P. Falciparum (relative),vectorborne_malariapf,rel,1,100
+Children exposed to Malaria P. Vivax (relative),vectorborne_malariapv,rel,1,100

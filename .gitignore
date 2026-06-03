@@ -1,11 +1,32 @@
-# Large reference / intermediate files
-data/misc/adm0.geojson
-data/misc/p1_p2_avg_ccri.geojson
+# Large reference / boundary files (download separately)
+misc/adm0.geojson
+misc/adm0_boundaries_simple.geojson
+misc/georepo_adm0.gpkg
+misc/child_pop_sum_adm0.csv
+misc/p1_p2_quadrant_scatter.png
+misc/Data downloading and processing.docx
 
-# Pixel rasters
-data/misc/ccri_pixel/
-data/CCRI_results_misc/*.tif
-data/CCRI_results_misc/*.aux.xml
+# Pipeline intermediate and large outputs
+misc/p1_p2_avg_ccri.geojson
+
+# MHI pixel rasters (download from GEE separately)
+Multi_Hazard_Indicators/MHI/data/
+
+# Hazard combination computed outputs
+Multi_Hazard_Indicators/Hazard_combination/HazardCombination_chunks.csv
+Multi_Hazard_Indicators/Hazard_combination/HazardCombination_final_filtered*.csv
+Multi_Hazard_Indicators/Hazard_combination/*.png
+
+# Country exposure auxiliary outputs
+Country_level_hazard_exposure/Hazard_Population_Exposure_adm2.csv
+Country_level_hazard_exposure/Hazard_Population_Exposure_tileScale4.csv
+Country_level_hazard_exposure/ARM.zip
+Country_level_hazard_exposure/ARM/
+Country_level_hazard_exposure/adm2_hazard_exposure_updated.ipynb
+Country_level_hazard_exposure/raster_stats.ipynb
+
+# GEE helper script
+misc/gee_app/hazard_combination.js
 
 # Python
 __pycache__/
