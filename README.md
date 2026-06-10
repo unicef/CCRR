@@ -1,6 +1,6 @@
 # Children's Climate Risk Report (CCRR) — Data Pipeline
 
-This repository contains the data and scripts for constructing the **Children's Climate Risk Index (CCRI)**, a country-level index measuring children's exposure to climate hazards (Pillar 1) and their underlying vulnerability (Pillar 2).
+This repository contains the data and scripts for the **Children's Climate Risk Report (CCRR)**, which provides insight into where children face the greatest climate hazard exposure and how vulnerable they are — drawing on 16 climate hazards, 17 child vulnerability indicators across 7 domains (health, nutrition, WASH, education, protection, poverty, and survival), and 2025 child population estimates.
 
 ---
 
@@ -71,7 +71,7 @@ The MHI raster is then uploaded to GEE as `projects/unicef-ccri/assets/hazards/M
 
 Computes population-weighted exposure for each country using GEE `reduceRegions`. Produces a single CSV covering:
 
-- Individual hazard binary exposure (17 hazards × absolute + relative)
+- Individual hazard binary exposure (16 hazards × absolute + relative)
 - Multi-Hazard Category (MHC): children exposed to 1–8+ hazard categories
 - Multi-Hazard Intensity (MHI): children above global p75/p80/p85/p90/p95 thresholds
 - Total population and child population per country
@@ -99,7 +99,7 @@ A single Python script that runs five sequential steps:
 |---|---|---|
 | 1 | Pillar 1 processing — normalize hazard exposure, apply force-null overrides | `misc/Merged_Exposure_Data.csv` |
 | 2 | Pillar 2 processing — normalize vulnerability indicators, compute domain averages | `misc/P2_Merged_Normalized_avg.csv`, `misc/p2_group_mean.csv` |
-| 3 | P1 + P2 aggregation — group geometric means, combined CCRI score | `misc/p1_group_mean.csv`, `misc/p1_p2_avg_ccri.csv` |
+| 3 | P1 + P2 aggregation — group geometric means, combined score | `misc/p1_group_mean.csv`, `misc/p1_p2_avg_ccri.csv` |
 | 4 | Quadrant classification — classify countries by P1/P2 relative to global median | `misc/ccri_quadrant_table.csv` |
 | 5 | Formatting — merge all layers, apply MHI/MHC, produce final GeoJSON | `misc/CCRR_output.geojson` |
 
@@ -112,13 +112,13 @@ A single Python script that runs five sequential steps:
 - `misc/List of fragile context (2025).csv`
 
 **Final output:** `misc/CCRR_output.geojson`  
-229 countries (195 States + 34 Territories), 162 columns including all hazard, vulnerability, MHI, MHC, and CCRI scores.
+229 countries (195 States + 34 Territories), 162 columns including all hazard, vulnerability, MHI, MHC, and combined scores.
 
 ---
 
 ## Key Design Decisions
 
-**Null handling:** Countries where a hazard model produces unreliable results are forced to null rather than zero. This propagates through the P1 geometric mean, leaving those countries without a CCRI score or quadrant classification. MHI and MHC values are also set to null for consistency. Affected countries:
+**Null handling:** Countries where a hazard model produces unreliable results are forced to null rather than zero. This propagates through the P1 geometric mean, leaving those countries without the combined score or quadrant classification. MHI and MHC values are also set to null for consistency. Affected countries:
 - Fiji — river flood
 - Federated States of Micronesia, Kiribati, Niue, Palau, Papua New Guinea, Marshall Islands, Samoa, Solomon Islands, Tonga, Tuvalu, Vanuatu — coastal flood
 
