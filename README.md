@@ -1,6 +1,6 @@
 # Children's Climate Risk Report (CCRR) — Data Pipeline
 
-This repository contains the data and scripts for the **Children's Climate Risk Report (CCRR)**, which provides insight into where children face the greatest climate hazard exposure and how vulnerable they are — drawing on 16 climate hazards, 17 child vulnerability indicators across 7 domains (health, nutrition, WASH, education, protection, poverty, and survival), and 2025 child population estimates.
+This repository contains the data and scripts for the **Children's Climate Risk Report (CCRR)**, which provides insight into where children face the greatest climate hazard exposure and how vulnerable they are — drawing on 10 climate hazards, 17 child vulnerability indicators across 7 domains (health, nutrition, WASH, education, protection, poverty, and survival), and 2025 child population estimates.
 
 ---
 
@@ -14,7 +14,7 @@ CCRR/
 │   ├── MHC/                    # Multi-Hazard Count methodology reference
 │   └── Hazard_combination/     # Country-level co-occurrence analysis
 ├── Country_level_hazard_exposure/  # Stage 2: GEE exposure computation + output CSV
-├── Vulnerability_data/         # Pillar 2 vulnerability indicator CSVs + download notebook
+├── Vulnerability_data/         # vulnerability indicator CSVs + download notebook
 ├── CCRR_Pipeline/              # Stage 3: local Python pipeline (ccrr_pipeline.py + config)
 └── misc/                       # Reference boundaries, classification tables, pipeline outputs
 ```
@@ -41,7 +41,7 @@ Individual notebooks download and process each raw hazard dataset and upload the
 | `malaria_average.ipynb` | Malaria Pf and Pv prevalence (multi-year average) |
 | `PM25_90th_percentile.ipynb` | Air pollution — PM2.5 90th percentile |
 | `compute_SPI_SPEI.ipynb` | Meteorological drought — SPI-12 and SPEI-12 (TerraClimate) |
-| `vulnerability_data_download.ipynb` | Pillar 2 vulnerability indicators (API download → `data/pillar2_data/`) |
+| `vulnerability_data_download.ipynb` | Vulnerability indicators (API download → `data/pillar2_data/`) |
 
 ---
 
@@ -54,12 +54,12 @@ Builds the **Multi-Hazard Intensity (MHI)** index — a continuous 0–10 pixel-
 
 | Script | Purpose |
 |---|---|
-| `MHI_input_gee.js` | Exports 13 hazard rasters + land-sea mask from GEE at ~0.1° resolution to `Multi_Hazard_Indicators/MHI/data/ccri_pixel/` |
+| `MHI_input_gee.js` | Exports all climate hazard rasters + land-sea mask from GEE at ~0.1° resolution to `Multi_Hazard_Indicators/MHI/data/ccri_pixel/` |
 | `mhi_construction.ipynb` | Applies log-transform → z-score normalization (land pixels only) → PCA weighting → MinMax scaling; outputs `Multi_Hazard_Indicators/MHI/data/MHI_climate.tif` |
 
 The MHI raster is then uploaded to GEE as `projects/unicef-ccri/assets/hazards/MHI_climate` for use in Stage 2.
 
-**Key inputs:** `Multi_Hazard_Indicators/MHI/data/ccri_pixel/*.tif` (13 hazard TIFs + `landSeaMask.tif`)  
+**Key inputs:** `Multi_Hazard_Indicators/MHI/data/ccri_pixel/*.tif` (climate hazard TIFs + `landSeaMask.tif`)  
 **Output:** `Multi_Hazard_Indicators/MHI/data/MHI_climate.tif`
 
 ---
@@ -97,10 +97,10 @@ A single Python script that runs five sequential steps:
 
 | Step | Function | Output |
 |---|---|---|
-| 1 | Pillar 1 processing — normalize hazard exposure, apply force-null overrides | `misc/Merged_Exposure_Data.csv` |
-| 2 | Pillar 2 processing — normalize vulnerability indicators, compute domain averages | `misc/P2_Merged_Normalized_avg.csv`, `misc/p2_group_mean.csv` |
-| 3 | P1 + P2 aggregation — group geometric means, combined score | `misc/p1_group_mean.csv`, `misc/p1_p2_avg_ccri.csv` |
-| 4 | Quadrant classification — classify countries by P1/P2 relative to global median | `misc/ccri_quadrant_table.csv` |
+| 1 | Hazard data processing — normalize hazard exposure, apply force-null overrides | `misc/Merged_Exposure_Data.csv` |
+| 2 | Vulnerability data processing — normalize vulnerability indicators, compute domain averages | `misc/P2_Merged_Normalized_avg.csv`, `misc/p2_group_mean.csv` |
+| 3 | Indicator aggregation — group geometric means, combined score | `misc/p1_group_mean.csv`, `misc/p1_p2_avg_ccri.csv` |
+| 4 | Quadrant classification — classify countries by two components relative to global median | `misc/ccri_quadrant_table.csv` |
 | 5 | Formatting — merge all layers, apply MHI/MHC, produce final GeoJSON | `misc/CCRR_output.geojson` |
 
 **Key inputs:**
